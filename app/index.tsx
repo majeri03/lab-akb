@@ -1,77 +1,65 @@
-import { Image, Text, View } from "react-native";
-import {Image as ExpoImage} from "expo-image";
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 
-export default function Index() {
+const infoMahasiswa = {
+  nama: "MAJERI",
+  nim: "105841103622",
+};
+
+export default function ShapeDisplayScreen() {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "#FFF", // opsional: untuk memberikan latar belakang putih
-      }}
-    >
-      <View
-        style={{
-          backgroundColor: "#FF5722",
-          height: 100,
-          justifyContent: "center",
-          alignItems: "center",
-          borderRadius: 10,
-          marginBottom: 20,
-          paddingHorizontal: 20,
-        }}
-      >
-        <Text
-          style={{
-            color: "#FFFFFF",
-            fontSize: 20,
-            fontWeight: "bold",
-          }}
-        >
-          Ali Sulton S Palilati - 105841102222
-        </Text>
-        <Text
-          style={{
-            color: "#FFFFFF",
-            fontSize: 16,
-            fontWeight: "bold",
-          }}
-        >
-          105841102222
-        </Text>
+    <View style={styles.canvas}>
+      <View style={styles.bentukSegitiga} />
+      <View style={styles.bentukPersegipanjang}>
+        <Text style={styles.primaryText}>{infoMahasiswa.nama}</Text>
       </View>
-
-      <Image
-        source={{
-          uri: "https://simak.unismuh.ac.id/upload/mahasiswa/105841101722_.jpg?1752197261",
-        }}
-        style={{
-          width: 300,
-          height: 300,
-          borderRadius: 10,
-          marginBottom: 20,
-        }}
-      />
-
-      <ExpoImage style={{
-        width: 100,
-        height: 100,
-      }} source={{
-        uri: "https://lh4.googleusercontent.com/proxy/FvDZQWzDKQPbb8xNwDa17mIv7vaW9xEocb46izhKFMzxOEWw_-pvq4VkBOvY_4xx4PqHlDJv3PWwaQ06BteHOOqDmF9E0JPWU-UntMHjgxcljOBb=s0-d",
-      }}/>
-
-      <View
-        style={{
-          backgroundColor: "#FF5722",
-          justifyContent: "center",
-          alignItems: "center",
-          borderRadius: 50,
-          height: 100,
-          width: 100,
-        }}
-      >
+      <View style={styles.bentukKapsulPil}>
+        <Text style={styles.primaryText}>{infoMahasiswa.nim}</Text>
       </View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  canvas: {
+    flex: 1,
+    backgroundColor: '#3B060A', 
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 35, 
+  },
+  bentukSegitiga: {
+    width: 0,
+    height: 0,
+    borderLeftWidth: 100,
+    borderRightWidth: 100,
+    borderBottomWidth: 110,
+    borderStyle: 'solid',
+    backgroundColor: 'transparent',
+    borderLeftColor: 'transparent',
+    borderRightColor: 'transparent',
+    borderBottomColor: '#ffffffff', 
+  },
+  bentukPersegipanjang: {
+    width: 380, 
+    height: 160,
+    backgroundColor: '#C83F12', 
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 10, 
+  },
+  bentukKapsulPil: {
+    width: 280, 
+    height: 80,
+    backgroundColor: '#FFF287', 
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 500, 
+    elevation: 10,
+  },
+  primaryText: {
+    color: 'black',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+})
