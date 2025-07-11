@@ -1,65 +1,43 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
+import InteractiveImageCell from './components/InteractiveImageCell';
+import { useGridManager } from './hooks/useGridManager';
 
-const infoMahasiswa = {
-  nama: "MAJERI",
-  nim: "105841103622",
-};
+/**
+ * @description Layar utama yang menampilkan grid gambar interaktif.
+ * Bertanggung jawab untuk menyusun layout grid dan menghubungkan logika dari hook.
+ */
 
-export default function ShapeDisplayScreen() {
+export default function ImageGridScreen() {
+  const { gridState, handleCellInteraction } = useGridManager();
+
   return (
-    <View style={styles.canvas}>
-      <View style={styles.bentukSegitiga} />
-      <View style={styles.bentukPersegipanjang}>
-        <Text style={styles.primaryText}>{infoMahasiswa.nama}</Text>
+    <SafeAreaView style={screenStyles.safeArea}>
+      <View style={screenStyles.gridContainer}>
+        {gridState.map(cell => (
+          <InteractiveImageCell
+            key={cell.id}
+            sourceUri={cell.currentSrc}
+            scaleValue={cell.scale}
+            onPress={() => handleCellInteraction(cell.id)}
+          />
+        ))}
       </View>
-      <View style={styles.bentukKapsulPil}>
-        <Text style={styles.primaryText}>{infoMahasiswa.nim}</Text>
-      </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
-  canvas: {
+const screenStyles = StyleSheet.create({
+  safeArea: {
     flex: 1,
-    backgroundColor: '#3B060A', 
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 35, 
+    backgroundColor: '#121212', 
   },
-  bentukSegitiga: {
-    width: 0,
-    height: 0,
-    borderLeftWidth: 100,
-    borderRightWidth: 100,
-    borderBottomWidth: 110,
-    borderStyle: 'solid',
-    backgroundColor: 'transparent',
-    borderLeftColor: 'transparent',
-    borderRightColor: 'transparent',
-    borderBottomColor: '#ffffffff', 
-  },
-  bentukPersegipanjang: {
-    width: 380, 
-    height: 160,
-    backgroundColor: '#C83F12', 
+  gridContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     justifyContent: 'center',
     alignItems: 'center',
-    elevation: 10, 
+    padding: 10,
   },
-  bentukKapsulPil: {
-    width: 280, 
-    height: 80,
-    backgroundColor: '#FFF287', 
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 500, 
-    elevation: 10,
-  },
-  primaryText: {
-    color: 'black',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-})
+});
