@@ -1,67 +1,80 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 
-// REGISTRY FONT 
-const FontAssetsToLoad = {
-  'Anton': require('./assets/fonts/statis/Anton-Regular.ttf'),
-  'Merriweather': require('./assets/fonts/statis/Merriweather_24pt-Regular.ttf'),
-  'Nunito': require('./assets/fonts/statis/Nunito-Light.ttf'),
-  'Playfair': require('./assets/fonts/statis/PlayfairDisplay-Regular.ttf'),
-  'SourceCode': require('./assets/fonts/statis/SourceCodePro-Regular.ttf'),
-  'Recursive': require('./assets/fonts/variabel/Recursive-VariableFont_CASL,CRSV,MONO,slnt,wght.ttf'),
-  'Epilogue': require('./assets/fonts/variabel/Epilogue-VariableFont_wght.ttf'),
-  'Jost': require('./assets/fonts/variabel/Jost-VariableFont_wght.ttf'),
-  'WorkSans': require('./assets/fonts/variabel/WorkSans-VariableFont_wght.ttf'),
-  'Lexend': require('./assets/fonts/variabel/Lexend-VariableFont_wght.ttf'),
+const daftarLengkapNama = [
+  "Nur Milani Hidayah", "Siti Marwa", "Alvian Syah burhani", "Hamdani", "Nur muhammad ashman", "SYAWALUDDIN", "Nabila ismail Matta", "Muliana", "Fajar Eka Alamsyah", "Nurmisba", "Ali sulton s palilati", "Andi citra ayu lestari", "A. Fajar Apriliawan", "Muhammad Adianto", "Yusri Ali", "Muhammad Faturrachman iswan", "Erick Yusuf kotte", "Ferdiansyah", "Arif Rahman", "ahmad fathir", "Majeri", "Budi Santoso", "Citra Lestari", "Dewi Anggraini", "Eka Prasetyo", "Fitri Handayani", "Gita Permata", "Hadi Wijaya", "Indah Sari", "Joko Susilo", "Kartika Putri", "Lutfi Hakim", "Mega Chandra", "Nanda Pratama", "Putra Wijaya", "Rina Amelia", "Sari Puspita", "Taufik Hidayat", "Utari Dewi", "Vino Bastian", "Wahyu Nugroho", "Yulia Rahman", "Zainal Abidin", "Rizki Ananda", "Bayu Aji", "Chandra Kirana", "Dian Lestari", "Elang Perkasa", "Farida Yani"
+];
+
+
+const FontAssets = {
+  // 10 font statis dan variabel
+  'Anton-Regular': require('./assets/fonts/statis/Anton-Regular.ttf'),
+  'Merriweather-Regular': require('./assets/fonts/statis/Merriweather_24pt-Regular.ttf'),
+  'Nunito-Light': require('./assets/fonts/statis/Nunito-Light.ttf'),
+  'PlayfairDisplay-Regular': require('./assets/fonts/statis/PlayfairDisplay-Regular.ttf'),
+  'SourceCodePro-Regular': require('./assets/fonts/statis/SourceCodePro-Regular.ttf'),
+  
+  'Recursive-Variable': require('./assets/fonts/variabel/Recursive-VariableFont_CASL,CRSV,MONO,slnt,wght.ttf'),
+  'Epilogue-Variable': require('./assets/fonts/variabel/Epilogue-VariableFont_wght.ttf'),
+  'Jost-Variable': require('./assets/fonts/variabel/Jost-VariableFont_wght.ttf'),
+  'WorkSans-Variable': require('./assets/fonts/variabel/WorkSans-VariableFont_wght.ttf'),
+  'Lexend-Variable': require('./assets/fonts/variabel/Lexend-VariableFont_wght.ttf'),
 };
 
 SplashScreen.preventAutoHideAsync();
 
-export default function FinalTaskScreen() {
-  const [isReady, setReady] = useState(false);
+export default function ExplicitFontShowcase() {
+  const [isReady, setIsReady] = React.useState(false);
 
   useEffect(() => {
     async function prepare() {
       try {
-        await Font.loadAsync(FontAssetsToLoad);
+        await Font.loadAsync(FontAssets);
       } catch (e) {
-        console.error("GAGAL MEMUAT FONT:", e);
+        console.warn("Kesalahan Pemuatan Font:", e);
       } finally {
-        setReady(true);
+        setIsReady(true);
         SplashScreen.hideAsync();
       }
     }
     prepare();
   }, []);
 
-  if (!isReady) return null;
+  if (!isReady) {
+    return null;
+  }
+
+  const myName = "Majeri";
+  const myIndex = daftarLengkapNama.indexOf(myName);
+  const totalNames = daftarLengkapNama.length;
+
+  const beforeNames = Array.from({ length: 5 }, (_, i) => daftarLengkapNama[(myIndex - (5 - i) + totalNames) % totalNames]);
+  const afterNames = Array.from({ length: 5 }, (_, i) => daftarLengkapNama[(myIndex + 1 + i) % totalNames]);
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
-        <Text style={styles.header}>Tugas 4 Final</Text>
-        <Text style={styles.subHeader}>Referensi Stambuk: Majeri (Urutan #21)</Text>
-
-        {/* FITUR EKSPLISIT: 5 NAMA SEBELUM STAMBUK */}
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>5 Nama Sebelum Stambuk</Text>
-          <Text style={[styles.nameItem, { fontFamily: 'Anton' }]}>16. Muhammad Faturrachman iswan</Text>
-          <Text style={[styles.nameItem, { fontFamily: 'Merriweather' }]}>17. Erick Yusuf kotte</Text>
-          <Text style={[styles.nameItem, { fontFamily: 'Nunito' }]}>18. Ferdiansyah</Text>
-          <Text style={[styles.nameItem, { fontFamily: 'Playfair' }]}>19. Arif Rahman</Text>
-          <Text style={[styles.nameItem, { fontFamily: 'SourceCode' }]}>20. ahmad fathir</Text>
+      <ScrollView contentContainerStyle={styles.content}>
+        <Text style={styles.mainTitle}>Final Task Showcase</Text>
+        <Text style={styles.subtitle}>Reference Name: {myName} (Urutan #{myIndex + 1})</Text>
+        
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>5 Nama Sebelum (5 Font Statis Berbeda)</Text>
+          <Text style={[styles.name, { fontFamily: 'Anton-Regular' }]}>1. {beforeNames[0]}</Text>
+          <Text style={[styles.name, { fontFamily: 'Merriweather-Regular' }]}>2. {beforeNames[1]}</Text>
+          <Text style={[styles.name, { fontFamily: 'Nunito-Light' }]}>3. {beforeNames[2]}</Text>
+          <Text style={[styles.name, { fontFamily: 'PlayfairDisplay-Regular' }]}>4. {beforeNames[3]}</Text>
+          <Text style={[styles.name, { fontFamily: 'SourceCodePro-Regular' }]}>5. {beforeNames[4]}</Text>
         </View>
 
-        {/* FITUR EKSPLISIT: 5 NAMA SETELAH STAMBUK */}
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>5 Nama Sesudah Stambuk</Text>
-          <Text style={[styles.nameItem, { fontFamily: 'Recursive' }]}>22. Budi Santoso</Text>
-          <Text style={[styles.nameItem, { fontFamily: 'Epilogue' }]}>23. Citra Lestari</Text>
-          <Text style={[styles.nameItem, { fontFamily: 'Jost' }]}>24. Dewi Anggraini</Text>
-          <Text style={[styles.nameItem, { fontFamily: 'WorkSans' }]}>25. Eka Prasetyo</Text>
-          <Text style={[styles.nameItem, { fontFamily: 'Lexend' }]}>26. Fitri Handayani</Text>
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>5 Nama Sesudah (5 Font Variabel Berbeda)</Text>
+          <Text style={[styles.name, { fontFamily: 'Recursive-Variable', fontWeight: '300' }]}>6. {afterNames[0]}</Text>
+          <Text style={[styles.name, { fontFamily: 'Epilogue-Variable', fontWeight: '500' }]}>7. {afterNames[1]}</Text>
+          <Text style={[styles.name, { fontFamily: 'Jost-Variable', fontWeight: '700' }]}>8. {afterNames[2]}</Text>
+          <Text style={[styles.name, { fontFamily: 'WorkSans-Variable', fontWeight: '900' }]}>9. {afterNames[3]}</Text>
+          <Text style={[styles.name, { fontFamily: 'Lexend-Variable', fontWeight: '400' }]}>10. {afterNames[4]}</Text>
         </View>
 
       </ScrollView>
@@ -70,10 +83,11 @@ export default function FinalTaskScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#FFFFFF' },
-  header: { fontSize: 24, fontWeight: 'bold', textAlign: 'center', padding: 10, color: '#000' },
-  subHeader: { fontSize: 16, textAlign: 'center', color: '#555', marginBottom: 15 },
-  card: { backgroundColor: '#F9FAFB', padding: 15, borderRadius: 12, marginBottom: 15, borderWidth: 1, borderColor: '#E5E7EB' },
-  cardTitle: { fontSize: 18, fontWeight: '600', color: '#111827', marginBottom: 10 },
-  nameItem: { fontSize: 22, color: '#374151', paddingVertical: 5 },
+  container: { flex: 1, backgroundColor: '#111827' },
+  content: { padding: 20 },
+  mainTitle: { fontSize: 36, fontWeight: 'bold', color: '#FFFFFF', textAlign: 'center', fontFamily: 'Anton-Regular' },
+  subtitle: { fontSize: 16, color: '#9CA3AF', textAlign: 'center', marginBottom: 30 },
+  section: { marginBottom: 25, backgroundColor: '#1F2937', padding: 15, borderRadius: 10 },
+  sectionTitle: { fontSize: 20, fontWeight: '600', color: '#F9FAFB', marginBottom: 10, borderBottomWidth: 1, borderBottomColor: '#4B5563', paddingBottom: 5 },
+  name: { fontSize: 24, color: '#E5E7EB', paddingVertical: 8 },
 });
