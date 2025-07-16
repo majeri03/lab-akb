@@ -7,19 +7,15 @@ const daftarLengkapNama = [
   "Nur Milani Hidayah", "Siti Marwa", "Alvian Syah burhani", "Hamdani", "Nur muhammad ashman", "SYAWALUDDIN", "Nabila ismail Matta", "Muliana", "Fajar Eka Alamsyah", "Nurmisba", "Ali sulton s palilati", "Andi citra ayu lestari", "A. Fajar Apriliawan", "Muhammad Adianto", "Yusri Ali", "Muhammad Faturrachman iswan", "Erick Yusuf kotte", "Ferdiansyah", "Arif Rahman", "ahmad fathir", "Majeri", "Budi Santoso", "Citra Lestari", "Dewi Anggraini", "Eka Prasetyo", "Fitri Handayani", "Gita Permata", "Hadi Wijaya", "Indah Sari", "Joko Susilo", "Kartika Putri", "Lutfi Hakim", "Mega Chandra", "Nanda Pratama", "Putra Wijaya", "Rina Amelia", "Sari Puspita", "Taufik Hidayat", "Utari Dewi", "Vino Bastian", "Wahyu Nugroho", "Yulia Rahman", "Zainal Abidin", "Rizki Ananda", "Bayu Aji", "Chandra Kirana", "Dian Lestari", "Elang Perkasa", "Farida Yani"
 ];
 
-// ================= PERINGATAN PENTING =================
-// PASTIKAN SETIAP NAMA FILE DI BAWAH INI SAMA PERSIS (TERMASUK BESAR KECIL HURUF)
-// DENGAN NAMA FILE .ttf YANG ADA DI FOLDER assets/fonts/ ANDA.
-// COPY-PASTE NAMA FILENYA UNTUK MENGHINDARI TYPO.
-// ========================================================
+
 const FontAssets = {
-  // 5 Font Statis
+  // 10 font statis dan variabel
   'Anton-Regular': require('./assets/fonts/statis/Anton-Regular.ttf'),
   'Merriweather-Regular': require('./assets/fonts/statis/Merriweather_24pt-Regular.ttf'),
   'Nunito-Light': require('./assets/fonts/statis/Nunito-Light.ttf'),
   'PlayfairDisplay-Regular': require('./assets/fonts/statis/PlayfairDisplay-Regular.ttf'),
   'SourceCodePro-Regular': require('./assets/fonts/statis/SourceCodePro-Regular.ttf'),
-  // 5 Font Variabel
+  
   'Recursive-Variable': require('./assets/fonts/variabel/Recursive-VariableFont_CASL,CRSV,MONO,slnt,wght.ttf'),
   'Epilogue-Variable': require('./assets/fonts/variabel/Epilogue-VariableFont_wght.ttf'),
   'Jost-Variable': require('./assets/fonts/variabel/Jost-VariableFont_wght.ttf'),
