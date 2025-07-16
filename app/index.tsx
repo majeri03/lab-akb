@@ -3,21 +3,13 @@ import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 
-// SEMUA ADA DI SINI. TIDAK ADA FILE LAIN.
-// DATA NAMA (TOTAL 50)
-const studentNameList = [
-  "Nur Milani Hidayah", "Siti Marwa", "Alvian Syah burhani", "Hamdani", "Nur muhammad ashman", "SYAWALUDDIN", "Nabila ismail Matta", "Muliana", "Fajar Eka Alamsyah", "Nurmisba", "Ali sulton s palilati", "Andi citra ayu lestari", "A. Fajar Apriliawan", "Muhammad Adianto", "Yusri Ali", "Muhammad Faturrachman iswan", "Erick Yusuf kotte", "Ferdiansyah", "Arif Rahman", "ahmad fathir", "Majeri", "Budi Santoso", "Citra Lestari", "Dewi Anggraini", "Eka Prasetyo", "Fitri Handayani", "Gita Permata", "Hadi Wijaya", "Indah Sari", "Joko Susilo", "Kartika Putri", "Lutfi Hakim", "Mega Chandra", "Nanda Pratama", "Putra Wijaya", "Rina Amelia", "Sari Puspita", "Taufik Hidayat", "Utari Dewi", "Vino Bastian", "Wahyu Nugroho", "Yulia Rahman", "Zainal Abidin", "Rizki Ananda", "Bayu Aji", "Chandra Kirana", "Dian Lestari", "Elang Perkasa", "Farida Yani"
-];
-
 // REGISTRY FONT 
-const FontAssets = {
-  // 10 FONT STATIS DAN VARIABEL
+const FontAssetsToLoad = {
   'Anton': require('./assets/fonts/statis/Anton-Regular.ttf'),
   'Merriweather': require('./assets/fonts/statis/Merriweather_24pt-Regular.ttf'),
   'Nunito': require('./assets/fonts/statis/Nunito-Light.ttf'),
   'Playfair': require('./assets/fonts/statis/PlayfairDisplay-Regular.ttf'),
   'SourceCode': require('./assets/fonts/statis/SourceCodePro-Regular.ttf'),
-  
   'Recursive': require('./assets/fonts/variabel/Recursive-VariableFont_CASL,CRSV,MONO,slnt,wght.ttf'),
   'Epilogue': require('./assets/fonts/variabel/Epilogue-VariableFont_wght.ttf'),
   'Jost': require('./assets/fonts/variabel/Jost-VariableFont_wght.ttf'),
@@ -27,18 +19,18 @@ const FontAssets = {
 
 SplashScreen.preventAutoHideAsync();
 
-export default function FinalSubmissionScreen() {
+export default function FinalTaskScreen() {
   const [isReady, setReady] = useState(false);
 
   useEffect(() => {
     async function prepare() {
       try {
-        await Font.loadAsync(FontAssets);
+        await Font.loadAsync(FontAssetsToLoad);
       } catch (e) {
-        console.error("GAGAL MEMUAT FONT, PERIKSA NAMA FILE ANDA:", e);
+        console.error("GAGAL MEMUAT FONT:", e);
       } finally {
         setReady(true);
-        await SplashScreen.hideAsync();
+        SplashScreen.hideAsync();
       }
     }
     prepare();
@@ -46,60 +38,42 @@ export default function FinalSubmissionScreen() {
 
   if (!isReady) return null;
 
-  // ================= LOGIKA EKSPLISIT  =================
-  const myName = "Majeri";
-  const stambukIndex = 20; // Dihitung manual: index dari "Majeri" adalah 20
-  const totalNames = 50;
-
-  // FITUR: PENGURUTAN 5 NAMA SEBELUM NOMOR STAMBUK (MANUAL)
-  const nameBefore5 = studentNameList[(stambukIndex - 5 + totalNames) % totalNames]; // -> Muhammad Adianto
-  const nameBefore4 = studentNameList[(stambukIndex - 4 + totalNames) % totalNames]; // -> Yusri Ali
-  const nameBefore3 = studentNameList[(stambukIndex - 3 + totalNames) % totalNames]; // -> Muhammad Faturrachman iswan
-  const nameBefore2 = studentNameList[(stambukIndex - 2 + totalNames) % totalNames]; // -> Erick Yusuf kotte
-  const nameBefore1 = studentNameList[(stambukIndex - 1 + totalNames) % totalNames]; // -> Ferdiansyah
-
-  // FITUR: PENGURUTAN 5 NAMA SETELAH NOMOR STAMBUK (MANUAL)
-  const nameAfter1 = studentNameList[(stambukIndex + 1) % totalNames]; // -> Budi Santoso
-  const nameAfter2 = studentNameList[(stambukIndex + 2) % totalNames]; // -> Citra Lestari
-  const nameAfter3 = studentNameList[(stambukIndex + 3) % totalNames]; // -> Dewi Anggraini
-  const nameAfter4 = studentNameList[(stambukIndex + 4) % totalNames]; // -> Eka Prasetyo
-  const nameAfter5 = studentNameList[(stambukIndex + 5) % totalNames]; // -> Fitri Handayani
-  // ====================================================================
-
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        <Text style={styles.header}>Final Submission - Tugas 4</Text>
-        <Text style={styles.subHeader}>Stambuk Referensi: {myName}</Text>
+        <Text style={styles.header}>Tugas 4 Final</Text>
+        <Text style={styles.subHeader}>Referensi Stambuk: Majeri (Urutan #21)</Text>
 
-        {/* FITUR: MENAMPILKAN 10 NAMA DENGAN 10 FONT BERBEDA */}
-        <View style={styles.section}>
-          <Text style={styles.sectionHeader}>5 Nama Sebelum Stambuk (5 Font Statis)</Text>
-          <Text style={[styles.nameItem, { fontFamily: 'Anton' }]}>1. {nameBefore5}</Text>
-          <Text style={[styles.nameItem, { fontFamily: 'Merriweather' }]}>2. {nameBefore4}</Text>
-          <Text style={[styles.nameItem, { fontFamily: 'Nunito' }]}>3. {nameBefore3}</Text>
-          <Text style={[styles.nameItem, { fontFamily: 'Playfair' }]}>4. {nameBefore2}</Text>
-          <Text style={[styles.nameItem, { fontFamily: 'SourceCode' }]}>5. {nameBefore1}</Text>
+        {/* FITUR EKSPLISIT: 5 NAMA SEBELUM STAMBUK */}
+        <View style={styles.card}>
+          <Text style={styles.cardTitle}>5 Nama Sebelum Stambuk</Text>
+          <Text style={[styles.nameItem, { fontFamily: 'Anton' }]}>16. Muhammad Faturrachman iswan</Text>
+          <Text style={[styles.nameItem, { fontFamily: 'Merriweather' }]}>17. Erick Yusuf kotte</Text>
+          <Text style={[styles.nameItem, { fontFamily: 'Nunito' }]}>18. Ferdiansyah</Text>
+          <Text style={[styles.nameItem, { fontFamily: 'Playfair' }]}>19. Arif Rahman</Text>
+          <Text style={[styles.nameItem, { fontFamily: 'SourceCode' }]}>20. ahmad fathir</Text>
         </View>
 
-        <View style={styles.section}>
-          <Text style={styles.sectionHeader}>5 Nama Sesudah Stambuk (5 Font Variabel)</Text>
-          <Text style={[styles.nameItem, { fontFamily: 'Recursive', fontWeight: '300' }]}>6. {nameAfter1}</Text>
-          <Text style={[styles.nameItem, { fontFamily: 'Epilogue', fontWeight: '500' }]}>7. {nameAfter2}</Text>
-          <Text style={[styles.nameItem, { fontFamily: 'Jost', fontWeight: '700' }]}>8. {nameAfter3}</Text>
-          <Text style={[styles.nameItem, { fontFamily: 'WorkSans', fontWeight: '900' }]}>9. {nameAfter4}</Text>
-          <Text style={[styles.nameItem, { fontFamily: 'Lexend', fontWeight: '400' }]}>10. {nameAfter5}</Text>
+        {/* FITUR EKSPLISIT: 5 NAMA SETELAH STAMBUK */}
+        <View style={styles.card}>
+          <Text style={styles.cardTitle}>5 Nama Sesudah Stambuk</Text>
+          <Text style={[styles.nameItem, { fontFamily: 'Recursive' }]}>22. Budi Santoso</Text>
+          <Text style={[styles.nameItem, { fontFamily: 'Epilogue' }]}>23. Citra Lestari</Text>
+          <Text style={[styles.nameItem, { fontFamily: 'Jost' }]}>24. Dewi Anggraini</Text>
+          <Text style={[styles.nameItem, { fontFamily: 'WorkSans' }]}>25. Eka Prasetyo</Text>
+          <Text style={[styles.nameItem, { fontFamily: 'Lexend' }]}>26. Fitri Handayani</Text>
         </View>
+
       </ScrollView>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#fff' },
+  container: { flex: 1, backgroundColor: '#FFFFFF' },
   header: { fontSize: 24, fontWeight: 'bold', textAlign: 'center', padding: 10, color: '#000' },
   subHeader: { fontSize: 16, textAlign: 'center', color: '#555', marginBottom: 15 },
-  section: { marginHorizontal: 10, marginBottom: 20 },
-  sectionHeader: { fontSize: 18, fontWeight: '600', color: '#333', marginBottom: 5 },
-  nameItem: { fontSize: 22, padding: 10, borderWidth: 1, borderColor: '#eee', borderRadius: 5, marginBottom: 5 },
+  card: { backgroundColor: '#F9FAFB', padding: 15, borderRadius: 12, marginBottom: 15, borderWidth: 1, borderColor: '#E5E7EB' },
+  cardTitle: { fontSize: 18, fontWeight: '600', color: '#111827', marginBottom: 10 },
+  nameItem: { fontSize: 22, color: '#374151', paddingVertical: 5 },
 });
