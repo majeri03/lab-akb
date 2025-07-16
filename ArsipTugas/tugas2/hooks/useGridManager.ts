@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { gridImageAssetSet, ImageAsset } from '../data/imageAssets';
+import { gridImageAssetSet, ImageAsset } from '../../../app/data/imageAssets';
 
 /**
  * @description Interface untuk state setiap sel dalam grid.
