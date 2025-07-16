@@ -4,18 +4,14 @@ import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 
 const daftarLengkapNama = [
-  "Nur Milani Hidayah", "Siti Marwa", "Alvian Syah burhani", "Hamdani", "Nur muhammad ashman",
-  "SYAWALUDDIN", "Nabila ismail Matta", "Muliana", "Fajar Eka Alamsyah", "Nurmisba",
-  "Ali sulton s palilati", "Andi citra ayu lestari", "A. Fajar Apriliawan", "Muhammad Adianto",
-  "Yusri Ali", "Muhammad Faturrachman iswan", "Erick Yusuf kotte", "Ferdiansyah",
-  "Arif Rahman", "ahmad fathir", "Majeri", "Budi Santoso", "Citra Lestari", "Dewi Anggraini",
-  "Eka Prasetyo", "Fitri Handayani", "Gita Permata", "Hadi Wijaya", "Indah Sari", "Joko Susilo",
-  "Kartika Putri", "Lutfi Hakim", "Mega Chandra", "Nanda Pratama", "Putra Wijaya",
-  "Rina Amelia", "Sari Puspita", "Taufik Hidayat", "Utari Dewi", "Vino Bastian",
-  "Wahyu Nugroho", "Yulia Rahman", "Zainal Abidin", "Rizki Ananda", "Bayu Aji",
-  "Chandra Kirana", "Dian Lestari", "Elang Perkasa", "Farida Yani"
+  "Nur Milani Hidayah", "Siti Marwa", "Alvian Syah burhani", "Hamdani", "Nur muhammad ashman", "SYAWALUDDIN", "Nabila ismail Matta", "Muliana", "Fajar Eka Alamsyah", "Nurmisba", "Ali sulton s palilati", "Andi citra ayu lestari", "A. Fajar Apriliawan", "Muhammad Adianto", "Yusri Ali", "Muhammad Faturrachman iswan", "Erick Yusuf kotte", "Ferdiansyah", "Arif Rahman", "ahmad fathir", "Majeri", "Budi Santoso", "Citra Lestari", "Dewi Anggraini", "Eka Prasetyo", "Fitri Handayani", "Gita Permata", "Hadi Wijaya", "Indah Sari", "Joko Susilo", "Kartika Putri", "Lutfi Hakim", "Mega Chandra", "Nanda Pratama", "Putra Wijaya", "Rina Amelia", "Sari Puspita", "Taufik Hidayat", "Utari Dewi", "Vino Bastian", "Wahyu Nugroho", "Yulia Rahman", "Zainal Abidin", "Rizki Ananda", "Bayu Aji", "Chandra Kirana", "Dian Lestari", "Elang Perkasa", "Farida Yani"
 ];
 
+// ================= PERINGATAN PENTING =================
+// PASTIKAN SETIAP NAMA FILE DI BAWAH INI SAMA PERSIS (TERMASUK BESAR KECIL HURUF)
+// DENGAN NAMA FILE .ttf YANG ADA DI FOLDER assets/fonts/ ANDA.
+// COPY-PASTE NAMA FILENYA UNTUK MENGHINDARI TYPO.
+// ========================================================
 const FontAssets = {
   // 5 Font Statis
   'Anton-Regular': require('./assets/fonts/statis/Anton-Regular.ttf'),
@@ -41,7 +37,7 @@ export default function ExplicitFontShowcase() {
       try {
         await Font.loadAsync(FontAssets);
       } catch (e) {
-        console.warn(e);
+        console.warn("Kesalahan Pemuatan Font:", e);
       } finally {
         setIsReady(true);
         SplashScreen.hideAsync();
@@ -54,50 +50,35 @@ export default function ExplicitFontShowcase() {
     return null;
   }
 
-  // LOGIKA PEMILIHAN NAMA SECARA EKSPLISIT
   const myName = "Majeri";
-  const myIndex = daftarLengkapNama.indexOf(myName); // Harusnya 20
-  const totalNames = daftarLengkapNama.length; // 50
+  const myIndex = daftarLengkapNama.indexOf(myName);
+  const totalNames = daftarLengkapNama.length;
 
-  // 5 Nama Sebelum (dihitung manual untuk kejelasan)
-  const before1 = daftarLengkapNama[(myIndex - 5 + totalNames) % totalNames];
-  const before2 = daftarLengkapNama[(myIndex - 4 + totalNames) % totalNames];
-  const before3 = daftarLengkapNama[(myIndex - 3 + totalNames) % totalNames];
-  const before4 = daftarLengkapNama[(myIndex - 2 + totalNames) % totalNames];
-  const before5 = daftarLengkapNama[(myIndex - 1 + totalNames) % totalNames];
-
-  // 5 Nama Sesudah (dihitung manual untuk kejelasan)
-  const after1 = daftarLengkapNama[(myIndex + 1) % totalNames];
-  const after2 = daftarLengkapNama[(myIndex + 2) % totalNames];
-  const after3 = daftarLengkapNama[(myIndex + 3) % totalNames];
-  const after4 = daftarLengkapNama[(myIndex + 4) % totalNames];
-  const after5 = daftarLengkapNama[(myIndex + 5) % totalNames];
+  const beforeNames = Array.from({ length: 5 }, (_, i) => daftarLengkapNama[(myIndex - (5 - i) + totalNames) % totalNames]);
+  const afterNames = Array.from({ length: 5 }, (_, i) => daftarLengkapNama[(myIndex + 1 + i) % totalNames]);
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.content}>
         <Text style={styles.mainTitle}>Final Task Showcase</Text>
-        <Text style={styles.subtitle}>Reference Name: {myName} (Index: {myIndex})</Text>
+        <Text style={styles.subtitle}>Reference Name: {myName} (Urutan #{myIndex + 1})</Text>
         
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>5 Nama Sebelum (5 Font Statis Berbeda)</Text>
-          {/* TUGAS 4.1: Menampilkan 5 nama sebelum dengan 5 font statis berbeda secara eksplisit */}
-          <Text style={[styles.name, { fontFamily: 'Anton-Regular' }]}>1. {before1}</Text>
-          <Text style={[styles.name, { fontFamily: 'Merriweather-Regular' }]}>2. {before2}</Text>
-          <Text style={[styles.name, { fontFamily: 'Nunito-Light' }]}>3. {before3}</Text>
-          <Text style={[styles.name, { fontFamily: 'PlayfairDisplay-Regular' }]}>4. {before4}</Text>
-          <Text style={[styles.name, { fontFamily: 'SourceCodePro-Regular' }]}>5. {before5}</Text>
+          <Text style={[styles.name, { fontFamily: 'Anton-Regular' }]}>1. {beforeNames[0]}</Text>
+          <Text style={[styles.name, { fontFamily: 'Merriweather-Regular' }]}>2. {beforeNames[1]}</Text>
+          <Text style={[styles.name, { fontFamily: 'Nunito-Light' }]}>3. {beforeNames[2]}</Text>
+          <Text style={[styles.name, { fontFamily: 'PlayfairDisplay-Regular' }]}>4. {beforeNames[3]}</Text>
+          <Text style={[styles.name, { fontFamily: 'SourceCodePro-Regular' }]}>5. {beforeNames[4]}</Text>
         </View>
 
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>5 Nama Sesudah (5 Font Variabel Berbeda)</Text>
-          {/* TUGAS 4.2: Menampilkan 5 nama sesudah dengan 5 font variabel berbeda secara eksplisit */}
-          {/* TUGAS 4.3: Bukti penggunaan font variabel dengan mengubah fontWeight */}
-          <Text style={[styles.name, { fontFamily: 'Recursive-Variable', fontWeight: '300' }]}>6. {after1}</Text>
-          <Text style={[styles.name, { fontFamily: 'Epilogue-Variable', fontWeight: '500' }]}>7. {after2}</Text>
-          <Text style={[styles.name, { fontFamily: 'Jost-Variable', fontWeight: '700' }]}>8. {after3}</Text>
-          <Text style={[styles.name, { fontFamily: 'WorkSans-Variable', fontWeight: '900' }]}>9. {after4}</Text>
-          <Text style={[styles.name, { fontFamily: 'Lexend-Variable', fontWeight: 'normal' }]}>10. {after5}</Text>
+          <Text style={[styles.name, { fontFamily: 'Recursive-Variable', fontWeight: '300' }]}>6. {afterNames[0]}</Text>
+          <Text style={[styles.name, { fontFamily: 'Epilogue-Variable', fontWeight: '500' }]}>7. {afterNames[1]}</Text>
+          <Text style={[styles.name, { fontFamily: 'Jost-Variable', fontWeight: '700' }]}>8. {afterNames[2]}</Text>
+          <Text style={[styles.name, { fontFamily: 'WorkSans-Variable', fontWeight: '900' }]}>9. {afterNames[3]}</Text>
+          <Text style={[styles.name, { fontFamily: 'Lexend-Variable', fontWeight: '400' }]}>10. {afterNames[4]}</Text>
         </View>
 
       </ScrollView>
