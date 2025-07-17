@@ -70,7 +70,7 @@ export default function FontShowcase() {
   
   const totalNames = sortedNamesAscending.length;
 
-  // LOGIKA PENGAMBILAN 5 NAMA SEBELUM NOMOR STAMBUK (dengan aturan khusus)
+  // LOGIKA PENGAMBILAN 5 NAMA SEBELUM NOMOR STAMBUK
   const getNamesBeforeStambuk = () => {
     const beforeNames = [];
     for (let i = 1; i <= 5; i++) {
