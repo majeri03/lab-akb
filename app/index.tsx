@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, Text, View, Alert } from 'react-native';
-import * as Font from 'expo-font';
-import * as SplashScreen from 'expo-splash-screen';
+import React from 'react';
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 // DAFTAR LENGKAP NAMA DENGAN STAMBUK - TIDAK TERPOTONG
 const daftarLengkapNama = [
@@ -56,65 +54,7 @@ const daftarLengkapNama = [
   { nama: "Zainal Abidin", stambuk: "049" }
 ];
 
-// IMPOR 10 FONT - 5 STATIS + 5 VARIABEL
-const FontAssets = {
-  // === 5 FONT STATIS ===
-  'Anton-Regular': require('./assets/fonts/statis/Anton-Regular.ttf'),
-  'Merriweather-Regular': require('./assets/fonts/statis/Merriweather_24pt-Regular.ttf'),
-  'Nunito-Light': require('./assets/fonts/statis/Nunito-Light.ttf'),
-  'PlayfairDisplay-Regular': require('./assets/fonts/statis/PlayfairDisplay-Regular.ttf'),
-  'SourceCodePro-Regular': require('./assets/fonts/statis/SourceCodePro-Regular.ttf'),
-  
-  // === 5 FONT VARIABEL ===
-  'Recursive-VariableFont': require('./assets/fonts/variabel/Recursive-VariableFont_CASL,CRSV,MONO,slnt,wght.ttf'),
-  'Epilogue-VariableFont': require('./assets/fonts/variabel/Epilogue-VariableFont_wght.ttf'),
-  'Jost-VariableFont': require('./assets/fonts/variabel/Jost-VariableFont_wght.ttf'),
-  'WorkSans-VariableFont': require('./assets/fonts/variabel/WorkSans-VariableFont_wght.ttf'),
-  'Lexend-VariableFont': require('./assets/fonts/variabel/Lexend-VariableFont_wght.ttf'),
-};
-
-// PREVENT SPLASH SCREEN AUTO HIDE
-SplashScreen.preventAutoHideAsync();
-
-export default function ExplicitFontShowcase() {
-  const [isReady, setIsReady] = useState(false);
-  const [fontsLoaded, setFontsLoaded] = useState(false);
-
-  useEffect(() => {
-    async function loadFonts() {
-      try {
-        console.log('Loading fonts...');
-        // EXPLICIT FONT LOADING
-        await Font.loadAsync(FontAssets);
-        setFontsLoaded(true);
-        console.log('All 10 fonts loaded successfully!');
-        
-        // SHOW SUCCESS ALERT
-        Alert.alert('Success', '10 fonts loaded successfully!\n5 Static + 5 Variable fonts');
-        
-      } catch (error) {
-        console.error('Font loading error:', error);
-        Alert.alert('Error', 'Failed to load fonts');
-      } finally {
-        setIsReady(true);
-        SplashScreen.hideAsync();
-      }
-    }
-    
-    loadFonts();
-  }, []);
-
-  if (!isReady || !fontsLoaded) {
-    return (
-      <SafeAreaView style={styles.container}>
-        <View style={styles.loadingContainer}>
-          <Text style={styles.loadingText}>Loading 10 fonts...</Text>
-          <Text style={styles.loadingSubText}>5 Static + 5 Variable</Text>
-        </View>
-      </SafeAreaView>
-    );
-  }
-
+export default function FontShowcase() {
   // IMPLEMENTASI PENGURUTAN BERDASARKAN STAMBUK
   const sortedNamesAscending = [...daftarLengkapNama].sort((a, b) => 
     a.stambuk.localeCompare(b.stambuk)
@@ -130,7 +70,7 @@ export default function ExplicitFontShowcase() {
   
   const totalNames = sortedNamesAscending.length;
 
-  // LOGIKA PENGAMBILAN 5 NAMA SEBELUM NOMOR STAMBUK
+  // LOGIKA PENGAMBILAN 5 NAMA SEBELUM NOMOR STAMBUK (dengan aturan khusus)
   const getNamesBeforeStambuk = () => {
     const beforeNames = [];
     for (let i = 1; i <= 5; i++) {
@@ -284,22 +224,6 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: 20
-  },
-  loadingContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  loadingText: {
-    fontSize: 24,
-    color: '#FFFFFF',
-    textAlign: 'center'
-  },
-  loadingSubText: {
-    fontSize: 16,
-    color: '#94A3B8',
-    textAlign: 'center',
-    marginTop: 10
   },
   header: {
     backgroundColor: '#1E293B',
