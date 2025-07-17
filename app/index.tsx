@@ -1,7 +1,7 @@
 import React from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 
-// Daftar nama yang sudah diurutkan secara manual berdasarkan stambuk
+// Daftar nama yang sudah diurutkan secara manual
 const daftarNamaUrut = [
     { nama: "Siti Marwa", stambuk: "105841100122" },
     { nama: "Fajar Eka Alamsyah", stambuk: "105841100322" },
@@ -26,14 +26,20 @@ const daftarNamaUrut = [
     { nama: "Yusri Ali", stambuk: "117222" },
 ];
 
+// Definisikan tipe untuk objek font
+type FontStyle = {
+  name: string;
+  weight: string;
+};
+
 export default function FontShowcase() {
   const myStambuk = "105841103622";
   const myIndex = daftarNamaUrut.findIndex(p => p.stambuk === myStambuk);
   const totalNames = daftarNamaUrut.length;
 
-  // Membuat satu daftar berisi 10 nama (5 sebelum dan 5 sesudah)
-  const displayList = [];
-  const fontList = [];
+  // Berikan tipe eksplisit pada array 'fontList'
+  const displayList: { nama: string, stambuk: string }[] = [];
+  const fontList: FontStyle[] = [];
   
   const staticFonts = ['Anton-Regular', 'Merriweather-Regular', 'Nunito-Light', 'PlayfairDisplay-Regular', 'SourceCodePro-Regular'];
   const variableFonts = ['Recursive-VariableFont', 'Epilogue-VariableFont', 'Jost-VariableFont', 'WorkSans-VariableFont', 'Lexend-VariableFont'];
@@ -43,14 +49,14 @@ export default function FontShowcase() {
   for (let i = 5; i >= 1; i--) {
     const index = (myIndex - i + totalNames) % totalNames;
     displayList.push(daftarNamaUrut[index]);
-    fontList.push({ name: staticFonts[5-i], weight: 'normal' });
+    fontList.push({ name: staticFonts[5 - i], weight: 'normal' });
   }
 
   // 5 nama sesudah
   for (let i = 1; i <= 5; i++) {
     const index = (myIndex + i) % totalNames;
     displayList.push(daftarNamaUrut[index]);
-    fontList.push({ name: variableFonts[i-1], weight: variableWeights[i-1] });
+    fontList.push({ name: variableFonts[i - 1], weight: variableWeights[i - 1] });
   }
 
   return (
