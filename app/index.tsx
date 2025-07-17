@@ -1,7 +1,7 @@
 import React from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 
-// Daftar nama yang sudah diurutkan secara manual
+// Daftar nama yang sudah diurutkan secara manual berdasarkan stambuk
 const daftarNamaUrut = [
     { nama: "Siti Marwa", stambuk: "105841100122" },
     { nama: "Fajar Eka Alamsyah", stambuk: "105841100322" },
@@ -26,38 +26,26 @@ const daftarNamaUrut = [
     { nama: "Yusri Ali", stambuk: "117222" },
 ];
 
-// Definisikan tipe untuk objek font
-type FontStyle = {
-  name: string;
-  weight: string;
-};
-
 export default function FontShowcase() {
   const myStambuk = "105841103622";
   const myIndex = daftarNamaUrut.findIndex(p => p.stambuk === myStambuk);
   const totalNames = daftarNamaUrut.length;
 
-  // Berikan tipe eksplisit pada array 'fontList'
-  const displayList: { nama: string, stambuk: string }[] = [];
-  const fontList: FontStyle[] = [];
-  
-  const staticFonts = ['Anton-Regular', 'Merriweather-Regular', 'Nunito-Light', 'PlayfairDisplay-Regular', 'SourceCodePro-Regular'];
-  const variableFonts = ['Recursive-VariableFont', 'Epilogue-VariableFont', 'Jost-VariableFont', 'WorkSans-VariableFont', 'Lexend-VariableFont'];
-  const variableWeights = ['300', '400', '500', '700', '900'];
-
-  // 5 nama sebelum
+  const beforeNames = [];
   for (let i = 5; i >= 1; i--) {
     const index = (myIndex - i + totalNames) % totalNames;
-    displayList.push(daftarNamaUrut[index]);
-    fontList.push({ name: staticFonts[5 - i], weight: 'normal' });
+    beforeNames.push(daftarNamaUrut[index]);
   }
 
-  // 5 nama sesudah
+  const afterNames = [];
   for (let i = 1; i <= 5; i++) {
     const index = (myIndex + i) % totalNames;
-    displayList.push(daftarNamaUrut[index]);
-    fontList.push({ name: variableFonts[i - 1], weight: variableWeights[i - 1] });
+    afterNames.push(daftarNamaUrut[index]);
   }
+
+  const staticFonts = ['Anton-Regular', 'Merriweather-Regular', 'Nunito-Light', 'PlayfairDisplay-Regular', 'SourceCodePro-Regular'];
+  const variableFonts = ['Recursive-VariableFont', 'Epilogue-VariableFont', 'Jost-VariableFont', 'WorkSans-VariableFont', 'Lexend-VariableFont'];
+  const variableWeights = ['300', '400', '500', '700', '900'] as const;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -65,28 +53,42 @@ export default function FontShowcase() {
 
         <View style={styles.header}>
           <Text style={[styles.mainTitle, { fontFamily: 'Anton-Regular' }]}>
-            Final Project Showcase
+            Font Showcase
           </Text>
           <Text style={styles.referenceText}>
-            Referensi: {daftarNamaUrut[myIndex].nama} ({myStambuk})
+            Referensi: {daftarNamaUrut[myIndex].nama} (Stambuk: {myStambuk})
           </Text>
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>10 Nama dengan Font Berbeda</Text>
-          {displayList.map((person, index) => (
+          <Text style={styles.sectionTitle}>5 Nama Sebelum Referensi</Text>
+          {beforeNames.map((person, index) => (
             <View key={person.stambuk} style={styles.nameContainer}>
-              <Text style={[
-                styles.name,
-                { 
-                  fontFamily: fontList[index].name,
-                  fontWeight: fontList[index].weight as any,
-                }
-              ]}>
-                {`${index + 1}. ${person.nama}`}
+              <Text style={[styles.name, { fontFamily: staticFonts[index] }]}>
+                {person.nama}
               </Text>
               <Text style={styles.stambukText}>
-                Stambuk: {person.stambuk} | Font: {fontList[index].name}
+                Stambuk: {person.stambuk}
+              </Text>
+            </View>
+          ))}
+        </View>
+        
+        <View style={[styles.section, { backgroundColor: '#3B82F6' }]}>
+            <Text style={[styles.name, {textAlign: 'center', fontWeight: 'bold'}]}>
+                {daftarNamaUrut[myIndex].nama}
+            </Text>
+        </View>
+
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>5 Nama Setelah Referensi</Text>
+          {afterNames.map((person, index) => (
+            <View key={person.stambuk} style={styles.nameContainer}>
+              <Text style={[styles.name, { fontFamily: variableFonts[index], fontWeight: variableWeights[index] }]}>
+                {person.nama}
+              </Text>
+              <Text style={styles.stambukText}>
+                Stambuk: {person.stambuk}
               </Text>
             </View>
           ))}
