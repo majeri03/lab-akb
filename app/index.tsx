@@ -22,8 +22,6 @@ const daftarNamaUrut = [
     { nama: "Majeri", stambuk: "105841103622" }, // TITIK REFERENSI
     { nama: "Hamdani", stambuk: "105841103722" },
     { nama: "Muliana", stambuk: "105841103822" },
-    { nama: "Nur muhammad ashman", stambuk: "N/A" },
-    { nama: "Yusri Ali", stambuk: "117222" },
 ];
 
 export default function FontShowcase() {
