@@ -55,22 +55,23 @@ const daftarLengkapNama = [
 ];
 
 export default function FontShowcase() {
-  // IMPLEMENTASI PENGURUTAN BERDASARKAN STAMBUK
-  const sortedNamesAscending = [...daftarLengkapNama].sort((a, b) => 
+  // 1. Implementasi pengurutan berdasarkan stambuk (ascending)
+  const sortedNamesAscending = [...daftarLengkapNama].sort((a, b) =>
     a.stambuk.localeCompare(b.stambuk)
   );
 
   const myName = "Majeri";
   const myStambuk = "027";
-  
-  // FIND INDEX BERDASARKAN STAMBUK YANG DIURUTKAN
-  const myIndex = sortedNamesAscending.findIndex(item => 
+
+  // 2. Cari indeks nama referensi dalam daftar yang sudah diurutkan
+  const myIndex = sortedNamesAscending.findIndex(item =>
     item.nama === myName && item.stambuk === myStambuk
   );
-  
+
   const totalNames = sortedNamesAscending.length;
 
-  // LOGIKA PENGAMBILAN 5 NAMA SEBELUM NOMOR STAMBUK
+  // 3. Logika untuk mengambil 5 nama SEBELUM stambuk referensi
+  // Aturan indeks rendah diimplementasikan menggunakan modulo (%)
   const getNamesBeforeStambuk = () => {
     const beforeNames = [];
     for (let i = 1; i <= 5; i++) {
@@ -80,7 +81,7 @@ export default function FontShowcase() {
     return beforeNames;
   };
 
-  // LOGIKA PENGAMBILAN 5 NAMA SETELAH NOMOR STAMBUK
+  // 4. Logika untuk mengambil 5 nama SETELAH stambuk referensi
   const getNamesAfterStambuk = () => {
     const afterNames = [];
     for (let i = 1; i <= 5; i++) {
@@ -93,31 +94,20 @@ export default function FontShowcase() {
   const beforeNames = getNamesBeforeStambuk();
   const afterNames = getNamesAfterStambuk();
 
-  // DAFTAR 5 FONT STATIS UNTUK NAMA SEBELUM
+  // 5. Daftar font yang akan diterapkan
   const staticFonts = [
-    'Anton-Regular',
-    'Merriweather-Regular', 
-    'Nunito-Light',
-    'PlayfairDisplay-Regular',
-    'SourceCodePro-Regular'
+    'Anton-Regular', 'Merriweather-Regular', 'Nunito-Light', 'PlayfairDisplay-Regular', 'SourceCodePro-Regular'
   ];
-
-  // DAFTAR 5 FONT VARIABEL UNTUK NAMA SETELAH
   const variableFonts = [
-    'Recursive-VariableFont',
-    'Epilogue-VariableFont',
-    'Jost-VariableFont', 
-    'WorkSans-VariableFont',
-    'Lexend-VariableFont'
+    'Recursive-VariableFont', 'Epilogue-VariableFont', 'Jost-VariableFont', 'WorkSans-VariableFont', 'Lexend-VariableFont'
   ];
-
   const variableWeights = ['300', '400', '500', '700', '900'] as const;
 
+  // 6. Render komponen dengan semua logika yang sudah diimplementasikan
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.content}>
         
-        {/* HEADER SECTION */}
         <View style={styles.header}>
           <Text style={[styles.mainTitle, { fontFamily: 'Anton-Regular' }]}>
             LAB AKB - FONT SHOWCASE
@@ -126,90 +116,51 @@ export default function FontShowcase() {
             Total Font Loaded: 10 (5 Static + 5 Variable)
           </Text>
           <Text style={styles.referenceText}>
-            Reference: {myName} (Stambuk: {myStambuk})
-          </Text>
-          <Text style={styles.referenceText}>
-            Position in sorted list: #{myIndex + 1}
+            Reference: {myName} (Stambuk: {myStambuk}) | Position: #{myIndex + 1}
           </Text>
         </View>
 
-        {/* FONT LOADING STATUS */}
-        <View style={styles.statusSection}>
-          <Text style={styles.statusTitle}>Font Loading Status:</Text>
-          <Text style={styles.statusText}>✅ 5 Static Fonts Loaded</Text>
-          <Text style={styles.statusText}>✅ 5 Variable Fonts Loaded</Text>
-          <Text style={styles.statusText}>✅ Total: 10 Fonts Ready</Text>
-        </View>
-
-        {/* 5 NAMA SEBELUM DENGAN 5 FONT STATIS */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>
-            5 NAMA SEBELUM STAMBUK {myStambuk} (5 FONT STATIS)
+            5 Nama Sebelum Stambuk {myStambuk} (5 Font Statis)
           </Text>
           {beforeNames.map((person, index) => (
             <View key={`before-${index}`} style={styles.nameContainer}>
               <Text style={[styles.name, { fontFamily: staticFonts[index] }]}>
-                {index + 1}. {person.nama}
+                {`${index + 1}. ${person.nama}`}
               </Text>
               <Text style={styles.stambukText}>
-                Stambuk: {person.stambuk} | Font: {staticFonts[index]}
+                {`Stambuk: ${person.stambuk} | Font: ${staticFonts[index]}`}
               </Text>
             </View>
           ))}
         </View>
 
-        {/* 5 NAMA SETELAH DENGAN 5 FONT VARIABEL */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>
-            5 NAMA SETELAH STAMBUK {myStambuk} (5 FONT VARIABEL)
+            5 Nama Setelah Stambuk {myStambuk} (5 Font Variabel)
           </Text>
           {afterNames.map((person, index) => (
             <View key={`after-${index}`} style={styles.nameContainer}>
               <Text style={[
-                styles.name, 
-                { 
-                  fontFamily: variableFonts[index],
-                  fontWeight: variableWeights[index]
-                }
+                styles.name,
+                { fontFamily: variableFonts[index], fontWeight: variableWeights[index] }
               ]}>
-                {index + 6}. {person.nama}
+                {`${index + 6}. ${person.nama}`}
               </Text>
               <Text style={styles.stambukText}>
-                Stambuk: {person.stambuk} | Font: {variableFonts[index]} (Weight: {variableWeights[index]})
+                {`Stambuk: ${person.stambuk} | Font: ${variableFonts[index]} (Weight: ${variableWeights[index]})`}
               </Text>
             </View>
           ))}
         </View>
-
-        {/* SUMMARY SECTION */}
+        
         <View style={styles.summarySection}>
-          <Text style={styles.summaryTitle}>SUMMARY LENGKAP:</Text>
-          <Text style={styles.summaryText}>✅ Total nama ditampilkan: 10</Text>
-          <Text style={styles.summaryText}>✅ 5 nama sebelum stambuk {myStambuk}</Text>
-          <Text style={styles.summaryText}>✅ 5 nama setelah stambuk {myStambuk}</Text>
-          <Text style={styles.summaryText}>✅ Pengurutan berdasarkan stambuk: ASCENDING</Text>
-          <Text style={styles.summaryText}>✅ 5 font statis digunakan</Text>
-          <Text style={styles.summaryText}>✅ 5 font variabel digunakan</Text>
-          <Text style={styles.summaryText}>✅ Total font: 10</Text>
-        </View>
-
-        {/* FONT DETAILS */}
-        <View style={styles.fontDetailsSection}>
-          <Text style={styles.fontDetailsTitle}>DETAIL FONT YANG DIGUNAKAN:</Text>
-          
-          <Text style={styles.fontCategoryTitle}>FONT STATIS (5):</Text>
-          {staticFonts.map((font, index) => (
-            <Text key={font} style={styles.fontItem}>
-              {index + 1}. {font}
-            </Text>
-          ))}
-          
-          <Text style={styles.fontCategoryTitle}>FONT VARIABEL (5):</Text>
-          {variableFonts.map((font, index) => (
-            <Text key={font} style={styles.fontItem}>
-              {index + 1}. {font}
-            </Text>
-          ))}
+            <Text style={styles.summaryTitle}>SUMMARY</Text>
+            <Text style={styles.summaryText}>✅ 10 nama ditampilkan dengan 10 font berbeda.</Text>
+            <Text style={styles.summaryText}>✅ 5 nama sebelum stambuk {myStambuk} dengan font statis.</Text>
+            <Text style={styles.summaryText}>✅ 5 nama setelah stambuk {myStambuk} dengan font variabel.</Text>
+            <Text style={styles.summaryText}>✅ Aturan indeks rendah (circular) sudah diimplementasikan.</Text>
         </View>
 
       </ScrollView>
@@ -217,6 +168,7 @@ export default function FontShowcase() {
   );
 }
 
+// Styles (tidak perlu diubah)
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -324,31 +276,5 @@ const styles = StyleSheet.create({
     color: '#E9D5FF',
     marginBottom: 8,
     fontWeight: '500'
-  },
-  fontDetailsSection: {
-    backgroundColor: '#DC2626',
-    padding: 20,
-    borderRadius: 12,
-    marginBottom: 20
-  },
-  fontDetailsTitle: {
-    fontSize: 16,
-    fontWeight: '700',
-    color: '#FFFFFF',
-    marginBottom: 15,
-    textAlign: 'center'
-  },
-  fontCategoryTitle: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#FEF2F2',
-    marginTop: 15,
-    marginBottom: 10
-  },
-  fontItem: {
-    fontSize: 12,
-    color: '#FECACA',
-    marginBottom: 5,
-    paddingLeft: 10
   }
 });
