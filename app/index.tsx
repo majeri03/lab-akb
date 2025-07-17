@@ -1,7 +1,7 @@
 import React from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 
-// DAFTAR LENGKAP NAMA DENGAN STAMBUK - TIDAK TERPOTONG
+// DAFTAR LENGKAP NAMA DAN STAMBUK
 const daftarLengkapNama = [
   { nama: "A. Fajar Apriliawan", stambuk: "001" },
   { nama: "ahmad fathir", stambuk: "002" },
@@ -54,47 +54,56 @@ const daftarLengkapNama = [
   { nama: "Zainal Abidin", stambuk: "049" }
 ];
 
-export default function FontShowcase() {
-  // 1. Implementasi pengurutan berdasarkan stambuk (ascending)
-  const sortedNamesAscending = [...daftarLengkapNama].sort((a, b) =>
+export default function ExplicitFontShowcase() {
+  // 1. PENGURUTAN BERDASARKAN STAMBUK
+  const sortedNames = [...daftarLengkapNama].sort((a, b) => 
     a.stambuk.localeCompare(b.stambuk)
   );
 
   const myName = "Majeri";
   const myStambuk = "027";
+  const totalNames = sortedNames.length;
 
-  // 2. Cari indeks nama referensi dalam daftar yang sudah diurutkan
-  const myIndex = sortedNamesAscending.findIndex(item =>
-    item.nama === myName && item.stambuk === myStambuk
-  );
+  // 2. TEMUKAN INDEKS NAMA REFERENSI
+  const myIndex = sortedNames.findIndex(item => item.stambuk === myStambuk);
+  const myData = sortedNames[myIndex];
 
-  const totalNames = sortedNamesAscending.length;
+  // 3. LOGIKA UNTUK MENGAMBIL 5 NAMA SEBELUM DAN 5 SESUDAH
+  // Aturan khusus untuk indeks rendah (circular/wrapping) diimplementasikan dengan modulo
+  const getDisplayList = () => {
+    const displayList = [];
 
-  // 3. Logika untuk mengambil 5 nama SEBELUM stambuk referensi
-  // Aturan indeks rendah diimplementasikan menggunakan modulo (%)
-  const getNamesBeforeStambuk = () => {
-    const beforeNames = [];
-    for (let i = 1; i <= 5; i++) {
+    // Mengambil 5 nama sebelum (mundur)
+    for (let i = 5; i >= 1; i--) {
       const index = (myIndex - i + totalNames) % totalNames;
-      beforeNames.unshift(sortedNamesAscending[index]);
+      displayList.push(sortedNames[index]);
     }
-    return beforeNames;
-  };
 
-  // 4. Logika untuk mengambil 5 nama SETELAH stambuk referensi
-  const getNamesAfterStambuk = () => {
-    const afterNames = [];
+    // Menambahkan nama referensi di tengah
+    displayList.push(myData);
+
+    // Mengambil 5 nama setelah (maju)
     for (let i = 1; i <= 5; i++) {
       const index = (myIndex + i) % totalNames;
-      afterNames.push(sortedNamesAscending[index]);
+      displayList.push(sortedNames[index]);
     }
-    return afterNames;
+
+    // Harusnya total ada 11 nama, kita ambil 10 nama (5 sebelum, 5 sesudah)
+    // Untuk tujuan ini, kita akan tampilkan 11 nama termasuk referensi
+    // Namun jika harus 10, kita bisa slice(1) atau slice(0, 10)
+    // Untuk kejelasan, kita tampilkan semua 11 (5 sebelum, 1 referensi, 5 sesudah)
+    
+    // Namun sesuai permintaan, kita akan tampilkan 10 nama
+    // 5 sebelum dan 5 sesudah, nama referensi hanya sebagai titik acuan
+    const beforeNames = displayList.slice(0, 5);
+    const afterNames = displayList.slice(6, 11);
+    
+    return { beforeNames, afterNames };
   };
 
-  const beforeNames = getNamesBeforeStambuk();
-  const afterNames = getNamesAfterStambuk();
+  const { beforeNames, afterNames } = getDisplayList();
 
-  // 5. Daftar font yang akan diterapkan
+  // 4. DAFTAR FONT YANG AKAN DIGUNAKAN
   const staticFonts = [
     'Anton-Regular', 'Merriweather-Regular', 'Nunito-Light', 'PlayfairDisplay-Regular', 'SourceCodePro-Regular'
   ];
@@ -103,178 +112,96 @@ export default function FontShowcase() {
   ];
   const variableWeights = ['300', '400', '500', '700', '900'] as const;
 
-  // 6. Render komponen dengan semua logika yang sudah diimplementasikan
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.content}>
         
         <View style={styles.header}>
           <Text style={[styles.mainTitle, { fontFamily: 'Anton-Regular' }]}>
-            LAB AKB - FONT SHOWCASE
-          </Text>
-          <Text style={styles.subtitle}>
-            Total Font Loaded: 10 (5 Static + 5 Variable)
+            Final Project Showcase
           </Text>
           <Text style={styles.referenceText}>
-            Reference: {myName} (Stambuk: {myStambuk}) | Position: #{myIndex + 1}
+            Referensi: {myName} (Stambuk: {myStambuk})
           </Text>
         </View>
 
+        {/* BAGIAN 5 NAMA SEBELUM */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>
-            5 Nama Sebelum Stambuk {myStambuk} (5 Font Statis)
+            5 Nama Sebelum Stambuk {myStambuk} (Font Statis)
           </Text>
           {beforeNames.map((person, index) => (
-            <View key={`before-${index}`} style={styles.nameContainer}>
+            <View key={`before-${person.stambuk}`} style={styles.nameContainer}>
               <Text style={[styles.name, { fontFamily: staticFonts[index] }]}>
-                {`${index + 1}. ${person.nama}`}
+                {`${sortedNames.findIndex(p => p.stambuk === person.stambuk) + 1}. ${person.nama}`}
               </Text>
               <Text style={styles.stambukText}>
-                {`Stambuk: ${person.stambuk} | Font: ${staticFonts[index]}`}
-              </Text>
-            </View>
-          ))}
-        </View>
-
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>
-            5 Nama Setelah Stambuk {myStambuk} (5 Font Variabel)
-          </Text>
-          {afterNames.map((person, index) => (
-            <View key={`after-${index}`} style={styles.nameContainer}>
-              <Text style={[
-                styles.name,
-                { fontFamily: variableFonts[index], fontWeight: variableWeights[index] }
-              ]}>
-                {`${index + 6}. ${person.nama}`}
-              </Text>
-              <Text style={styles.stambukText}>
-                {`Stambuk: ${person.stambuk} | Font: ${variableFonts[index]} (Weight: ${variableWeights[index]})`}
+                Stambuk: {person.stambuk} | Font: {staticFonts[index]}
               </Text>
             </View>
           ))}
         </View>
         
-        <View style={styles.summarySection}>
-            <Text style={styles.summaryTitle}>SUMMARY</Text>
-            <Text style={styles.summaryText}>✅ 10 nama ditampilkan dengan 10 font berbeda.</Text>
-            <Text style={styles.summaryText}>✅ 5 nama sebelum stambuk {myStambuk} dengan font statis.</Text>
-            <Text style={styles.summaryText}>✅ 5 nama setelah stambuk {myStambuk} dengan font variabel.</Text>
-            <Text style={styles.summaryText}>✅ Aturan indeks rendah (circular) sudah diimplementasikan.</Text>
+        {/* NAMA REFERENSI */}
+        <View style={[styles.section, styles.referenceSection]}>
+            <Text style={[styles.name, {fontFamily: 'Jost-VariableFont', fontWeight: 'bold', fontSize: 26, textAlign: 'center'}]}>
+                {myIndex + 1}. {myName}
+            </Text>
+            <Text style={[styles.stambukText, {textAlign: 'center'}]}>
+                Stambuk: {myStambuk} (Referensi)
+            </Text>
         </View>
 
+        {/* BAGIAN 5 NAMA SETELAH */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>
+            5 Nama Setelah Stambuk {myStambuk} (Font Variabel)
+          </Text>
+          {afterNames.map((person, index) => (
+            <View key={`after-${person.stambuk}`} style={styles.nameContainer}>
+              <Text style={[
+                styles.name, 
+                { fontFamily: variableFonts[index], fontWeight: variableWeights[index] }
+              ]}>
+                {`${sortedNames.findIndex(p => p.stambuk === person.stambuk) + 1}. ${person.nama}`}
+              </Text>
+              <Text style={styles.stambukText}>
+                Stambuk: {person.stambuk} | Font: {variableFonts[index]} (Weight: {variableWeights[index]})
+              </Text>
+            </View>
+          ))}
+        </View>
+        
       </ScrollView>
     </SafeAreaView>
   );
 }
 
-// Styles (tidak perlu diubah)
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#0F172A'
-  },
-  content: {
-    padding: 20
-  },
+  container: { flex: 1, backgroundColor: '#0F172A' },
+  content: { padding: 20 },
   header: {
-    backgroundColor: '#1E293B',
-    padding: 20,
-    borderRadius: 12,
-    marginBottom: 20,
-    borderWidth: 2,
-    borderColor: '#3B82F6'
+    backgroundColor: '#1E293B', padding: 20, borderRadius: 12, marginBottom: 20,
+    borderWidth: 2, borderColor: '#3B82F6'
   },
-  mainTitle: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    color: '#FFFFFF',
-    textAlign: 'center',
-    marginBottom: 10
-  },
-  subtitle: {
-    fontSize: 16,
-    color: '#22D3EE',
-    textAlign: 'center',
-    fontWeight: '600'
-  },
-  referenceText: {
-    fontSize: 14,
-    color: '#94A3B8',
-    textAlign: 'center',
-    marginTop: 5
-  },
-  statusSection: {
-    backgroundColor: '#065F46',
-    padding: 15,
-    borderRadius: 10,
-    marginBottom: 20
-  },
-  statusTitle: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#FFFFFF',
-    marginBottom: 10
-  },
-  statusText: {
-    fontSize: 14,
-    color: '#A7F3D0',
-    marginBottom: 5
-  },
+  mainTitle: { fontSize: 32, fontWeight: 'bold', color: '#FFFFFF', textAlign: 'center', marginBottom: 10 },
+  referenceText: { fontSize: 14, color: '#94A3B8', textAlign: 'center', marginTop: 5 },
   section: {
-    backgroundColor: '#1E293B',
-    padding: 20,
-    borderRadius: 12,
-    marginBottom: 20,
-    borderWidth: 1,
-    borderColor: '#334155'
+    backgroundColor: '#1E293B', padding: 20, borderRadius: 12,
+    marginBottom: 20, borderWidth: 1, borderColor: '#334155'
+  },
+  referenceSection: {
+      backgroundColor: '#3B82F6',
+      borderColor: '#FFFFFF'
   },
   sectionTitle: {
-    fontSize: 18,
-    fontWeight: '700',
-    color: '#F1F5F9',
-    marginBottom: 15,
-    textAlign: 'center',
-    borderBottomWidth: 2,
-    borderBottomColor: '#3B82F6',
-    paddingBottom: 10
+    fontSize: 18, fontWeight: '700', color: '#F1F5F9', marginBottom: 15,
+    textAlign: 'center', borderBottomWidth: 2, borderBottomColor: '#3B82F6', paddingBottom: 10
   },
   nameContainer: {
-    marginBottom: 15,
-    padding: 10,
-    backgroundColor: '#0F172A',
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: '#475569'
+    marginBottom: 15, padding: 10, backgroundColor: '#0F172A',
+    borderRadius: 8, borderWidth: 1, borderColor: '#475569'
   },
-  name: {
-    fontSize: 22,
-    color: '#FFFFFF',
-    marginBottom: 5,
-    lineHeight: 30
-  },
-  stambukText: {
-    fontSize: 12,
-    color: '#94A3B8',
-    fontStyle: 'italic'
-  },
-  summarySection: {
-    backgroundColor: '#7C3AED',
-    padding: 20,
-    borderRadius: 12,
-    marginBottom: 20
-  },
-  summaryTitle: {
-    fontSize: 18,
-    fontWeight: '700',
-    color: '#FFFFFF',
-    marginBottom: 15,
-    textAlign: 'center'
-  },
-  summaryText: {
-    fontSize: 14,
-    color: '#E9D5FF',
-    marginBottom: 8,
-    fontWeight: '500'
-  }
+  name: { fontSize: 22, color: '#FFFFFF', marginBottom: 5, lineHeight: 30 },
+  stambukText: { fontSize: 12, color: '#94A3B8', fontStyle: 'italic' },
 });
