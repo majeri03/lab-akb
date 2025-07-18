@@ -1,171 +1,127 @@
 import React from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, Text, View, StyleProp, TextStyle } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 
-const KartuNama = ({ nama, stambuk, gayaFont, infoFont }: { nama: string, stambuk: string, gayaFont: StyleProp<TextStyle>, infoFont: string }) => (
-  <View style={gaya.blokNama}>
-    <Text style={[gaya.teksNama, gayaFont]}>{nama}</Text>
-    <Text style={gaya.teksStambuk}>{stambuk}</Text>
-    <Text style={gaya.infoFont}>{infoFont}</Text>
-  </View>
-);
-
-export default function TampilanFontMajeri() {
+export default function HalamanTugasMajeri() {
   return (
-    <SafeAreaView style={gaya.wadah}>
-      <ScrollView contentContainerStyle={gaya.konten}>
+    <SafeAreaView style={desain.areaAman}>
+      <ScrollView contentContainerStyle={desain.kontenScroll}>
 
-        <View style={gaya.kepalaHalaman}>
-          <Text style={[gaya.judulUtama, { fontFamily: 'Anton-Regular' }]}>
-            Proyek Font Majeri
+        <View style={desain.headerAplikasi}>
+          <Text style={[desain.teksJudul, { fontFamily: 'Anton-Regular' }]}>
+            Tugas 4 - LAB AKB
           </Text>
-          <Text style={gaya.teksReferensi}>
-            Titik Acuan: Majeri (105841103622)
+          <Text style={desain.teksSubJudul}>
+             Majeri (105841103622)
           </Text>
         </View>
 
         {/* --- 5 NAMA SEBELUM (FONT STATIS) --- */}
-        <KartuNama 
-          nama="1. Ali sulton s palilati"
-          stambuk="105841102222"
-          gayaFont={{ fontFamily: 'Anton-Regular' }}
-          infoFont="Font: Anton-Regular"
-        />
-        <KartuNama 
-          nama="2. ahmad fathir"
-          stambuk="105841102922"
-          gayaFont={{ fontFamily: 'Merriweather-Regular' }}
-          infoFont="Font: Merriweather-Regular"
-        />
-        <KartuNama 
-          nama="3. Muhammad Faturrachman iswan"
-          stambuk="105841103322"
-          gayaFont={{ fontFamily: 'Nunito-Light' }}
-          infoFont="Font: Nunito-Light"
-        />
-        <KartuNama 
-          nama="4. Nurmisba"
-          stambuk="105841103422"
-          gayaFont={{ fontFamily: 'PlayfairDisplay-Regular' }}
-          infoFont="Font: PlayfairDisplay-Regular"
-        />
-        <KartuNama 
-          nama="5. Alvian Syah burhani"
-          stambuk="105841103522"
-          gayaFont={{ fontFamily: 'SourceCodePro-Regular' }}
-          infoFont="Font: SourceCodePro-Regular"
-        />
-
-        <View style={[gaya.blokNama, gaya.namaReferensi]}>
-            <Text style={gaya.teksNamaReferensi}>Majeri</Text>
-            <Text style={gaya.teksStambukReferensi}>(105841103622)</Text>
+        <View style={desain.kartuNama}>
+          <Text style={[desain.teksNama, { fontFamily: 'Anton-Regular' }]}>Ali sulton s palilati</Text>
+          <Text style={desain.teksStambuk}>105841102222</Text>
+        </View>
+        <View style={desain.kartuNama}>
+          <Text style={[desain.teksNama, { fontFamily: 'Merriweather-Regular' }]}>ahmad fathir</Text>
+          <Text style={desain.teksStambuk}>105841102922</Text>
+        </View>
+        <View style={desain.kartuNama}>
+          <Text style={[desain.teksNama, { fontFamily: 'Nunito-Light' }]}>Muhammad Faturrachman iswan</Text>
+          <Text style={desain.teksStambuk}>105841103322</Text>
+        </View>
+        <View style={desain.kartuNama}>
+          <Text style={[desain.teksNama, { fontFamily: 'PlayfairDisplay-Regular' }]}>Nurmisba</Text>
+          <Text style={desain.teksStambuk}>105841103422</Text>
+        </View>
+        <View style={desain.kartuNama}>
+          <Text style={[desain.teksNama, { fontFamily: 'SourceCodePro-Regular' }]}>Alvian Syah burhani</Text>
+          <Text style={desain.teksStambuk}>105841103522</Text>
         </View>
         
-        <KartuNama 
-          nama="6. Hamdani"
-          stambuk="105841103722"
-          gayaFont={{ fontFamily: 'Recursive-VariableFont', fontWeight: '300' }}
-          infoFont="Font: Recursive-VariableFont (Weight: 300)"
-        />
-        <KartuNama 
-          nama="7. Muliana"
-          stambuk="105841103822"
-          gayaFont={{ fontFamily: 'Epilogue-VariableFont', fontWeight: '400' }}
-          infoFont="Font: Epilogue-VariableFont (Weight: 400)"
-        />
-        <KartuNama 
-          nama="8. Yusri Ali"
-          stambuk="105841117222"
-          gayaFont={{ fontFamily: 'Jost-VariableFont', fontWeight: '500' }}
-          infoFont="Font: Jost-VariableFont (Weight: 500)"
-        />
-        <KartuNama 
-          nama="9. Nur muhammad ashman"
-          stambuk="N/A"
-          gayaFont={{ fontFamily: 'WorkSans-VariableFont', fontWeight: '700' }}
-          infoFont="Font: WorkSans-VariableFont (Weight: 700)"
-        />
-        <KartuNama 
-          nama="10. Arif Rahman"
-          stambuk="105841100921"
-          gayaFont={{ fontFamily: 'Lexend-VariableFont', fontWeight: '900' }}
-          infoFont="Font: Lexend-VariableFont (Weight: 900)"
-        />
+        {/* --- PEMISAH --- */}
+        <View style={desain.pemisah}>
+            <Text style={desain.teksPemisah}>--- Titik Acuan: Majeri ---</Text>
+        </View>
+
+        {/* --- 5 NAMA SESUDAH (FONT VARIABEL) --- */}
+        <View style={desain.kartuNama}>
+          <Text style={[desain.teksNama, { fontFamily: 'Recursive-VariableFont', fontWeight: '300' }]}>Hamdani</Text>
+          <Text style={desain.teksStambuk}>105841103722</Text>
+        </View>
+        <View style={desain.kartuNama}>
+          <Text style={[desain.teksNama, { fontFamily: 'Epilogue-VariableFont', fontWeight: '400' }]}>Muliana</Text>
+          <Text style={desain.teksStambuk}>105841103822</Text>
+        </View>
+        <View style={desain.kartuNama}>
+          <Text style={[desain.teksNama, { fontFamily: 'Jost-VariableFont', fontWeight: '500' }]}>Yusri Ali</Text>
+          <Text style={desain.teksStambuk}>105841117222</Text>
+        </View>
+        <View style={desain.kartuNama}>
+          <Text style={[desain.teksNama, { fontFamily: 'WorkSans-VariableFont', fontWeight: '700' }]}>Nur muhammad ashman</Text>
+          <Text style={desain.teksStambuk}>N/A</Text>
+        </View>
+        <View style={desain.kartuNama}>
+          <Text style={[desain.teksNama, { fontFamily: 'Lexend-VariableFont', fontWeight: '900' }]}>Arif Rahman</Text>
+          <Text style={desain.teksStambuk}>105841100921</Text>
+        </View>
 
       </ScrollView>
     </SafeAreaView>
   );
 }
 
-const gaya = StyleSheet.create({
-  wadah: { 
+const desain = StyleSheet.create({
+  areaAman: { 
     flex: 1, 
-    backgroundColor: '#0A192F' 
+    backgroundColor: '#F5F5F5', 
   },
-  konten: { 
-    paddingHorizontal: 20,
-    paddingVertical: 30,
-    alignItems: 'center',
+  kontenScroll: { 
+    padding: 20,
   },
-  kepalaHalaman: {
-    width: '100%',
+  headerAplikasi: {
     marginBottom: 25,
-    padding: 20,
-    backgroundColor: '#172A45',
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: '#38BDF8',
+    paddingVertical: 15,
+    borderBottomWidth: 2,
+    borderBottomColor: '#DEDEDE',
   },
-  judulUtama: { 
-    fontSize: 30, 
+  teksJudul: { 
+    fontSize: 32, 
     fontWeight: 'bold', 
-    color: '#E2E8F0', 
+    color: '#111111', 
     textAlign: 'center', 
   },
-  teksReferensi: { 
-    fontSize: 15, 
-    color: '#A8B2D1', 
+  teksSubJudul: { 
+    fontSize: 14, 
+    color: '#777777', 
     textAlign: 'center', 
-    marginTop: 10 
+    marginTop: 4 
   },
-  blokNama: {
-    backgroundColor: '#112240',
-    padding: 20,
-    marginBottom: 16,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: '#233554',
-    width: '100%',
-    alignItems: 'center',
+  kartuNama: {
+    backgroundColor: '#FFFFFF',
+    padding: 18,
+    borderRadius: 5,
+    marginBottom: 12,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.20,
+    shadowRadius: 1.41,
+    elevation: 2,
   },
   teksNama: {
-    fontSize: 24,
-    color: '#CCD6F6',
-    lineHeight: 32,
-    textAlign: 'center',
+    fontSize: 22,
+    color: '#333333',
+    marginBottom: 4,
   },
   teksStambuk: {
-    fontSize: 14,
-    color: '#8892B0',
-    marginTop: 5,
+    fontSize: 15,
+    color: '#888888',
   },
-  infoFont: {
-    fontSize: 12,
-    color: '#4A5C7E',
-    marginTop: 8,
-    fontStyle: 'italic',
+  pemisah: {
+      marginVertical: 15,
+      alignItems: 'center',
   },
-  namaReferensi: {
-    backgroundColor: '#38BDF8',
-    borderColor: '#7DD3FC',
-  },
-  teksNamaReferensi: {
-      fontSize: 26,
-      color: '#0A192F',
+  teksPemisah: {
+      color: '#AAAAAA',
       fontWeight: 'bold',
-  },
-  teksStambukReferensi: {
-      fontSize: 14,
-      color: '#172A45',
-      marginTop: 4,
+      letterSpacing: 1,
   }
 });
