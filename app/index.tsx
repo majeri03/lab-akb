@@ -1,127 +1,72 @@
 import React from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 
-export default function HalamanTugasMajeri() {
+export default function TugasAkhirMajeri() {
   return (
-    <SafeAreaView style={desain.areaAman}>
-      <ScrollView contentContainerStyle={desain.kontenScroll}>
+    <SafeAreaView style={jeryVisual.latar}>
+      <ScrollView contentContainerStyle={jeryVisual.konten}>
 
-        <View style={desain.headerAplikasi}>
-          <Text style={[desain.teksJudul, { fontFamily: 'Anton-Regular' }]}>
-            Tugas 4 - LAB AKB
-          </Text>
-          <Text style={desain.teksSubJudul}>
-             Majeri (105841103622)
-          </Text>
-        </View>
+        <Text style={[jeryVisual.judul, { fontFamily: 'Anton-Regular' }]}>
+          TUGAS 4 LAB - Majeri
+        </Text>
+        <Text style={jeryVisual.subJudul}>
+          Referensi Stambuk: 105841103622
+        </Text>
 
-        {/* --- 5 NAMA SEBELUM (FONT STATIS) --- */}
-        <View style={desain.kartuNama}>
-          <Text style={[desain.teksNama, { fontFamily: 'Anton-Regular' }]}>Ali sulton s palilati</Text>
-          <Text style={desain.teksStambuk}>105841102222</Text>
-        </View>
-        <View style={desain.kartuNama}>
-          <Text style={[desain.teksNama, { fontFamily: 'Merriweather-Regular' }]}>ahmad fathir</Text>
-          <Text style={desain.teksStambuk}>105841102922</Text>
-        </View>
-        <View style={desain.kartuNama}>
-          <Text style={[desain.teksNama, { fontFamily: 'Nunito-Light' }]}>Muhammad Faturrachman iswan</Text>
-          <Text style={desain.teksStambuk}>105841103322</Text>
-        </View>
-        <View style={desain.kartuNama}>
-          <Text style={[desain.teksNama, { fontFamily: 'PlayfairDisplay-Regular' }]}>Nurmisba</Text>
-          <Text style={desain.teksStambuk}>105841103422</Text>
-        </View>
-        <View style={desain.kartuNama}>
-          <Text style={[desain.teksNama, { fontFamily: 'SourceCodePro-Regular' }]}>Alvian Syah burhani</Text>
-          <Text style={desain.teksStambuk}>105841103522</Text>
-        </View>
-        
-        {/* --- PEMISAH --- */}
-        <View style={desain.pemisah}>
-            <Text style={desain.teksPemisah}>--- Titik Acuan: Majeri ---</Text>
-        </View>
+        <View style={jeryVisual.pemisah} />
 
-        {/* --- 5 NAMA SESUDAH (FONT VARIABEL) --- */}
-        <View style={desain.kartuNama}>
-          <Text style={[desain.teksNama, { fontFamily: 'Recursive-VariableFont', fontWeight: '300' }]}>Hamdani</Text>
-          <Text style={desain.teksStambuk}>105841103722</Text>
-        </View>
-        <View style={desain.kartuNama}>
-          <Text style={[desain.teksNama, { fontFamily: 'Epilogue-VariableFont', fontWeight: '400' }]}>Muliana</Text>
-          <Text style={desain.teksStambuk}>105841103822</Text>
-        </View>
-        <View style={desain.kartuNama}>
-          <Text style={[desain.teksNama, { fontFamily: 'Jost-VariableFont', fontWeight: '500' }]}>Yusri Ali</Text>
-          <Text style={desain.teksStambuk}>105841117222</Text>
-        </View>
-        <View style={desain.kartuNama}>
-          <Text style={[desain.teksNama, { fontFamily: 'WorkSans-VariableFont', fontWeight: '700' }]}>Nur muhammad ashman</Text>
-          <Text style={desain.teksStambuk}>N/A</Text>
-        </View>
-        <View style={desain.kartuNama}>
-          <Text style={[desain.teksNama, { fontFamily: 'Lexend-VariableFont', fontWeight: '900' }]}>Arif Rahman</Text>
-          <Text style={desain.teksStambuk}>105841100921</Text>
-        </View>
+        {/* --- 5 NAMA DENGAN FONT STATIS --- */}
+        <Text style={[jeryVisual.itemTeks, { fontFamily: 'Anton-Regular' }]}>
+          Ali sulton s palilati{'\n'}(105841102222)
+        </Text>
+        <Text style={[jeryVisual.itemTeks, { fontFamily: 'Merriweather-Regular', fontSize: 20 }]}>
+          ahmad fathir{'\n'}(105841102922)
+        </Text>
+        <Text style={[jeryVisual.itemTeks, { fontFamily: 'Nunito-Light', color: '#333' }]}>
+          Muhammad Faturrachman iswan{'\n'}(105841103322)
+        </Text>
+        <Text style={[jeryVisual.itemTeks, { fontFamily: 'PlayfairDisplay-Regular', fontStyle: 'italic' }]}>
+          Nurmisba{'\n'}(105841103422)
+        </Text>
+        <Text style={[jeryVisual.itemTeks, { fontFamily: 'SourceCodePro-Regular' }]}>
+          Alvian Syah burhani{'\n'}(105841103522)
+        </Text>
+
+        <View style={jeryVisual.pemisah} />
+
+        {/* --- 5 NAMA DENGAN FONT VARIABEL --- */}
+        <Text style={[jeryVisual.itemTeks, { fontFamily: 'Recursive-VariableFont', fontWeight: '300' }]}>
+          Hamdani{'\n'}(105841103722)
+        </Text>
+        <Text style={[jeryVisual.itemTeks, { fontFamily: 'Epilogue-VariableFont', fontWeight: '400', fontSize: 20 }]}>
+          Muliana{'\n'}(105841103822)
+        </Text>
+        <Text style={[jeryVisual.itemTeks, { fontFamily: 'Jost-VariableFont', fontWeight: '500', color: '#333' }]}>
+          Yusri Ali{'\n'}(105841117222)
+        </Text>
+        <Text style={[jeryVisual.itemTeks, { fontFamily: 'WorkSans-VariableFont', fontWeight: '700', fontStyle: 'italic' }]}>
+          Nur muhammad ashman{'\n'}(105841103122)
+        </Text>
+        <Text style={[jeryVisual.itemTeks, { fontFamily: 'Lexend-VariableFont', fontWeight: '900' }]}>
+          Arif Rahman{'\n'}(105841100921)
+        </Text>
 
       </ScrollView>
     </SafeAreaView>
   );
 }
 
-const desain = StyleSheet.create({
-  areaAman: { 
-    flex: 1, 
-    backgroundColor: '#F5F5F5', 
+const jeryVisual = StyleSheet.create({
+  latar: {  flex: 1, backgroundColor: '#EFEFEF',
   },
-  kontenScroll: { 
-    padding: 20,
+  konten: { paddingHorizontal: 15, paddingVertical: 25,
   },
-  headerAplikasi: {
-    marginBottom: 25,
-    paddingVertical: 15,
-    borderBottomWidth: 2,
-    borderBottomColor: '#DEDEDE',
+  judul: { fontSize: 28, fontWeight: 'bold',  color: '#222', textAlign: 'center',marginBottom: 5,
   },
-  teksJudul: { 
-    fontSize: 32, 
-    fontWeight: 'bold', 
-    color: '#111111', 
-    textAlign: 'center', 
+  subJudul: { fontSize: 14,color: '#888', textAlign: 'center', 
   },
-  teksSubJudul: { 
-    fontSize: 14, 
-    color: '#777777', 
-    textAlign: 'center', 
-    marginTop: 4 
+  itemTeks: {fontSize: 22,color: '#000',textAlign: 'center',marginBottom: 20,padding: 10,borderWidth: 1,borderColor: '#DDD',borderRadius: 4,backgroundColor: '#FFF',lineHeight: 30,
   },
-  kartuNama: {
-    backgroundColor: '#FFFFFF',
-    padding: 18,
-    borderRadius: 5,
-    marginBottom: 12,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.20,
-    shadowRadius: 1.41,
-    elevation: 2,
-  },
-  teksNama: {
-    fontSize: 22,
-    color: '#333333',
-    marginBottom: 4,
-  },
-  teksStambuk: {
-    fontSize: 15,
-    color: '#888888',
-  },
-  pemisah: {
-      marginVertical: 15,
-      alignItems: 'center',
-  },
-  teksPemisah: {
-      color: '#AAAAAA',
-      fontWeight: 'bold',
-      letterSpacing: 1,
+  pemisah: {height: 1,backgroundColor: '#CCC',width: '80%',alignSelf: 'center', marginVertical: 20,
   }
 });
