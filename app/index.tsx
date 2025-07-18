@@ -1,121 +1,171 @@
 import React from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, Text, View, StyleProp, TextStyle } from 'react-native';
 
-// Tipe data untuk setiap orang dalam daftar
-type Person = {
-  nama: string;
-  stambuk: string;
-};
+const KartuNama = ({ nama, stambuk, gayaFont, infoFont }: { nama: string, stambuk: string, gayaFont: StyleProp<TextStyle>, infoFont: string }) => (
+  <View style={gaya.blokNama}>
+    <Text style={[gaya.teksNama, gayaFont]}>{nama}</Text>
+    <Text style={gaya.teksStambuk}>{stambuk}</Text>
+    <Text style={gaya.infoFont}>{infoFont}</Text>
+  </View>
+);
 
-// Tipe data untuk gaya font yang akan diterapkan
-type FontStyle = {
-  fontFamily: string;
-  fontWeight?: 'normal' | 'bold' | '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900';
-};
-
-// Daftar nama yang sudah diurutkan secara manual berdasarkan stambuk
-const daftarNamaUrut: Person[] = [
-    { nama: "Arif Rahman", stambuk: "105841100921" },
-    { nama: "Siti Marwa", stambuk: "105841100122" },
-    { nama: "Fajar Eka Alamsyah", stambuk: "105841100322" },
-    { nama: "Ferdiansyah", stambuk: "105841100422" },
-    { nama: "Nabila ismail Matta", stambuk: "105841100722" },
-    { nama: "Nur Milani Hidayah", stambuk: "105841100822" },
-    { nama: "A. Fajar Apriliawan", stambuk: "105841101122" },
-    { nama: "Muhammad Adianto", stambuk: "105841101322" },
-    { nama: "SYAWALUDDIN", stambuk: "105841101622" },
-    { nama: "Andi citra ayu lestari", stambuk: "105841101722" },
-    { nama: "Erick Yusuf kotte", stambuk: "105841101922" },
-    { nama: "Ali sulton s palilati", stambuk: "105841102222" },
-    { nama: "ahmad fathir", stambuk: "105841102922" },
-    { nama: "Muhammad Faturrachman iswan", stambuk: "105841103322" },
-    { nama: "Nurmisba", stambuk: "105841103422" },
-    { nama: "Alvian Syah burhani", stambuk: "105841103522" },
-    { nama: "Majeri", stambuk: "105841103622" }, // TITIK REFERENSI
-    { nama: "Hamdani", stambuk: "105841103722" },
-    { nama: "Muliana", stambuk: "105841103822" },
-    { nama: "Yusri Ali", stambuk: "105841117222" },
-    { nama: "Nur muhammad ashman", stambuk: "N/A" },
-];
-
-export default function FontShowcase() {
-  const myStambuk = "105841103622";
-  const myIndex = daftarNamaUrut.findIndex(p => p.stambuk === myStambuk);
-  const totalNames = daftarNamaUrut.length;
-
-  // Daftar 10 font yang akan digunakan, 5 statis dan 5 variabel
-  const fontStyles: FontStyle[] = [
-    // 5 Font Statis
-    { fontFamily: 'Anton-Regular', fontWeight: 'normal' },
-    { fontFamily: 'Merriweather-Regular', fontWeight: 'normal' },
-    { fontFamily: 'Nunito-Light', fontWeight: 'normal' },
-    { fontFamily: 'PlayfairDisplay-Regular', fontWeight: 'normal' },
-    { fontFamily: 'SourceCodePro-Regular', fontWeight: 'normal' },
-    // 5 Font Variabel
-    { fontFamily: 'Recursive-VariableFont', fontWeight: '300' },
-    { fontFamily: 'Epilogue-VariableFont', fontWeight: '400' },
-    { fontFamily: 'Jost-VariableFont', fontWeight: '500' },
-    { fontFamily: 'WorkSans-VariableFont', fontWeight: '700' },
-    { fontFamily: 'Lexend-VariableFont', fontWeight: '900' },
-  ];
-
-  // Membuat SATU DAFTAR TUNGGAL berisi 10 nama yang akan ditampilkan
-  const displayList: Person[] = [];
-  
-  // Mengisi 5 nama sebelum referensi
-  for (let i = 5; i >= 1; i--) {
-    const index = (myIndex - i + totalNames) % totalNames;
-    displayList.push(daftarNamaUrut[index]);
-  }
-
-  // Mengisi 5 nama setelah referensi
-  for (let i = 1; i <= 5; i++) {
-    const index = (myIndex + i) % totalNames;
-    displayList.push(daftarNamaUrut[index]);
-  }
-
+export default function TampilanFontMajeri() {
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView contentContainerStyle={styles.content}>
+    <SafeAreaView style={gaya.wadah}>
+      <ScrollView contentContainerStyle={gaya.konten}>
 
-        <View style={styles.header}>
-          <Text style={[styles.mainTitle, { fontFamily: 'Anton-Regular' }]}>
-            Showcase Font Tugas
+        <View style={gaya.kepalaHalaman}>
+          <Text style={[gaya.judulUtama, { fontFamily: 'Anton-Regular' }]}>
+            Proyek Font Majeri
           </Text>
-          <Text style={styles.referenceText}>
-            Referensi: {daftarNamaUrut[myIndex].nama} ({myStambuk})
+          <Text style={gaya.teksReferensi}>
+            Titik Acuan: Majeri (105841103622)
           </Text>
         </View>
 
-        {/* Render 10 nama menggunakan SATU LOOP dan menerapkan font yang sesuai */}
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>10 Nama dengan 10 Font Berbeda</Text>
-          {displayList.map((person, index) => (
-            <View key={`${person.stambuk}-${index}`} style={styles.nameContainer}>
-              <Text style={[styles.name, fontStyles[index] as StyleProp<TextStyle>]}>
-                {`${index + 1}. ${person.nama}`}
-              </Text>
-              <Text style={styles.stambukText}>
-                Stambuk: {person.stambuk} | Font: {fontStyles[index].fontFamily}
-              </Text>
-            </View>
-          ))}
+        {/* --- 5 NAMA SEBELUM (FONT STATIS) --- */}
+        <KartuNama 
+          nama="1. Ali sulton s palilati"
+          stambuk="105841102222"
+          gayaFont={{ fontFamily: 'Anton-Regular' }}
+          infoFont="Font: Anton-Regular"
+        />
+        <KartuNama 
+          nama="2. ahmad fathir"
+          stambuk="105841102922"
+          gayaFont={{ fontFamily: 'Merriweather-Regular' }}
+          infoFont="Font: Merriweather-Regular"
+        />
+        <KartuNama 
+          nama="3. Muhammad Faturrachman iswan"
+          stambuk="105841103322"
+          gayaFont={{ fontFamily: 'Nunito-Light' }}
+          infoFont="Font: Nunito-Light"
+        />
+        <KartuNama 
+          nama="4. Nurmisba"
+          stambuk="105841103422"
+          gayaFont={{ fontFamily: 'PlayfairDisplay-Regular' }}
+          infoFont="Font: PlayfairDisplay-Regular"
+        />
+        <KartuNama 
+          nama="5. Alvian Syah burhani"
+          stambuk="105841103522"
+          gayaFont={{ fontFamily: 'SourceCodePro-Regular' }}
+          infoFont="Font: SourceCodePro-Regular"
+        />
+
+        <View style={[gaya.blokNama, gaya.namaReferensi]}>
+            <Text style={gaya.teksNamaReferensi}>Majeri</Text>
+            <Text style={gaya.teksStambukReferensi}>(105841103622)</Text>
         </View>
+        
+        <KartuNama 
+          nama="6. Hamdani"
+          stambuk="105841103722"
+          gayaFont={{ fontFamily: 'Recursive-VariableFont', fontWeight: '300' }}
+          infoFont="Font: Recursive-VariableFont (Weight: 300)"
+        />
+        <KartuNama 
+          nama="7. Muliana"
+          stambuk="105841103822"
+          gayaFont={{ fontFamily: 'Epilogue-VariableFont', fontWeight: '400' }}
+          infoFont="Font: Epilogue-VariableFont (Weight: 400)"
+        />
+        <KartuNama 
+          nama="8. Yusri Ali"
+          stambuk="105841117222"
+          gayaFont={{ fontFamily: 'Jost-VariableFont', fontWeight: '500' }}
+          infoFont="Font: Jost-VariableFont (Weight: 500)"
+        />
+        <KartuNama 
+          nama="9. Nur muhammad ashman"
+          stambuk="N/A"
+          gayaFont={{ fontFamily: 'WorkSans-VariableFont', fontWeight: '700' }}
+          infoFont="Font: WorkSans-VariableFont (Weight: 700)"
+        />
+        <KartuNama 
+          nama="10. Arif Rahman"
+          stambuk="105841100921"
+          gayaFont={{ fontFamily: 'Lexend-VariableFont', fontWeight: '900' }}
+          infoFont="Font: Lexend-VariableFont (Weight: 900)"
+        />
 
       </ScrollView>
     </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#0F172A' },
-  content: { padding: 20 },
-  header: { backgroundColor: '#1E293B', padding: 20, borderRadius: 12, marginBottom: 20, borderWidth: 2, borderColor: '#3B82F6' },
-  mainTitle: { fontSize: 32, fontWeight: 'bold', color: '#FFFFFF', textAlign: 'center', marginBottom: 10 },
-  referenceText: { fontSize: 14, color: '#94A3B8', textAlign: 'center', marginTop: 5 },
-  section: { backgroundColor: '#1E293B', padding: 20, borderRadius: 12, marginBottom: 20, borderWidth: 1, borderColor: '#334155' },
-  sectionTitle: { fontSize: 18, fontWeight: '700', color: '#F1F5F9', marginBottom: 15, textAlign: 'center', borderBottomWidth: 2, borderBottomColor: '#3B82F6', paddingBottom: 10 },
-  nameContainer: { marginBottom: 15, padding: 10, backgroundColor: '#0F172A', borderRadius: 8, borderWidth: 1, borderColor: '#475569' },
-  name: { fontSize: 22, color: '#FFFFFF', marginBottom: 5, lineHeight: 30 },
-  stambukText: { fontSize: 12, color: '#94A3B8', fontStyle: 'italic' },
+const gaya = StyleSheet.create({
+  wadah: { 
+    flex: 1, 
+    backgroundColor: '#0A192F' 
+  },
+  konten: { 
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+    alignItems: 'center',
+  },
+  kepalaHalaman: {
+    width: '100%',
+    marginBottom: 25,
+    padding: 20,
+    backgroundColor: '#172A45',
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#38BDF8',
+  },
+  judulUtama: { 
+    fontSize: 30, 
+    fontWeight: 'bold', 
+    color: '#E2E8F0', 
+    textAlign: 'center', 
+  },
+  teksReferensi: { 
+    fontSize: 15, 
+    color: '#A8B2D1', 
+    textAlign: 'center', 
+    marginTop: 10 
+  },
+  blokNama: {
+    backgroundColor: '#112240',
+    padding: 20,
+    marginBottom: 16,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#233554',
+    width: '100%',
+    alignItems: 'center',
+  },
+  teksNama: {
+    fontSize: 24,
+    color: '#CCD6F6',
+    lineHeight: 32,
+    textAlign: 'center',
+  },
+  teksStambuk: {
+    fontSize: 14,
+    color: '#8892B0',
+    marginTop: 5,
+  },
+  infoFont: {
+    fontSize: 12,
+    color: '#4A5C7E',
+    marginTop: 8,
+    fontStyle: 'italic',
+  },
+  namaReferensi: {
+    backgroundColor: '#38BDF8',
+    borderColor: '#7DD3FC',
+  },
+  teksNamaReferensi: {
+      fontSize: 26,
+      color: '#0A192F',
+      fontWeight: 'bold',
+  },
+  teksStambukReferensi: {
+      fontSize: 14,
+      color: '#172A45',
+      marginTop: 4,
+  }
 });
