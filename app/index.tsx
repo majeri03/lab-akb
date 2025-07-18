@@ -3,7 +3,7 @@ import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 // Daftar nama yang sudah diurutkan secara manual berdasarkan stambuk
 const daftarNamaUrut = [
-    { nama: "Siti Marwa", stambuk: "105841100122" },
+   { nama: "Siti Marwa", stambuk: "105841100122" },
     { nama: "Fajar Eka Alamsyah", stambuk: "105841100322" },
     { nama: "Ferdiansyah", stambuk: "105841100422" },
     { nama: "Nabila ismail Matta", stambuk: "105841100722" },
@@ -21,7 +21,7 @@ const daftarNamaUrut = [
     { nama: "Alvian Syah burhani", stambuk: "105841103522" },
     { nama: "Majeri", stambuk: "105841103622" }, // TITIK REFERENSI
     { nama: "Hamdani", stambuk: "105841103722" },
-    { nama: "Muliana", stambuk: "105841103822" },
+    { nama: "Muliana", stambuk: "105841103822" }
 ];
 
 export default function FontShowcase() {
