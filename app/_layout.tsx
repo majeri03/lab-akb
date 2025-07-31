@@ -1,10 +1,7 @@
-// Ganti isi file app/_layout.tsx dengan kode ini:
-
-import { Tabs } from "expo-router";
+import { Stack } from "expo-router";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
-import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 
 SplashScreen.preventAutoHideAsync();
 
@@ -22,7 +19,7 @@ export default function RootLayout() {
     'Lexend-VariableFont': require('./assets/fonts/variabel/Lexend-VariableFont_wght.ttf'),
   });
 
-  useEffect(() => {
+ useEffect(() => {
     if (loaded || error) {
       SplashScreen.hideAsync();
     }
@@ -31,43 +28,8 @@ export default function RootLayout() {
   if (!loaded && !error) {
     return null;
   }
-  
-  return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: '#007AFF', 
-        tabBarInactiveTintColor: '#8E8E93', 
-        tabBarStyle: {
-          backgroundColor: '#FFFFFF', 
-        },
-        headerStyle: {
-          backgroundColor: '#FFFFFF',
-        },
-        headerTitleStyle: {
-          fontWeight: 'bold',
-        },
-      }}
-    >
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Tugas 6', 
-          tabBarLabel: 'Utama', 
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="home" size={size} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="tugas4"
-        options={{
-          title: 'Arsip Tugas 4',
-          tabBarLabel: 'Arsip',
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="archive" size={size} color={color} />
-          ),
-        }}
-      />
-    </Tabs>
-  );
+
+  return <Stack>
+    <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+  </Stack>
 }
