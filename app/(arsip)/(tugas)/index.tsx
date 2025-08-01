@@ -1,6 +1,6 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet} from 'react-native';
 // Kita tidak butuh useRouter atau Href lagi untuk ini, cukup Link
-import { Link, Stack } from 'expo-router';
+import {  Stack } from 'expo-router';
 
 export default function TugasIndex() {
   return (
@@ -9,11 +9,7 @@ export default function TugasIndex() {
       <Text style={styles.text}>Selamat Datang di Halaman Tugas</Text>
       <Text style={styles.subText}>Pilih tab di bawah untuk melihat tugas-tugas lainnya</Text>
       
-      <Link href="/" asChild>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Kembali ke Home</Text>
-        </TouchableOpacity>
-      </Link>
+     
     </View>
   );
 }
