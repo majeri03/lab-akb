@@ -9,7 +9,6 @@ export default function TugasIndex() {
       <Text style={styles.text}>Selamat Datang di Halaman Tugas</Text>
       <Text style={styles.subText}>Pilih tab di bawah untuk melihat tugas-tugas lainnya</Text>
       
-      {/* SOLUSI DEFINITIF: Ganti Button dengan Link */}
       <Link href="/" asChild>
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>Kembali ke Home</Text>
@@ -19,7 +18,6 @@ export default function TugasIndex() {
   );
 }
 
-// Pastikan style Anda memiliki 'button' dan 'buttonText'
 const styles = StyleSheet.create({
   container: {
     flex: 1,
