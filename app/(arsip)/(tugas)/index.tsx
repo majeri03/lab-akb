@@ -1,15 +1,27 @@
-import { View, Text, StyleSheet} from 'react-native';
-// Kita tidak butuh useRouter atau Href lagi untuk ini, cukup Link
-import {  Stack } from 'expo-router';
+import { Link } from 'expo-router';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
-export default function TugasIndex() {
+const TugasButton = ({ href, title }: { href: any, title: string }) => (
+  <Link href={href} asChild>
+    <Pressable style={styles.button}>
+      <Text style={styles.buttonText}>{title}</Text>
+    </Pressable>
+  </Link>
+);
+
+export default function TugasScreen() {
   return (
     <View style={styles.container}>
-      <Stack.Screen options={{ headerTitle: "Daftar Tugas" }} />
-      <Text style={styles.text}>Selamat Datang di Halaman Tugas</Text>
-      <Text style={styles.subText}>Pilih tab di bawah untuk melihat tugas-tugas lainnya</Text>
+      <Text style={styles.title}>Daftar Arsip Tugas</Text>
+      <TugasButton href="/(arsip)/(tugas)/tugas4" title="Tugas 4" />
+      <TugasButton href="/(arsip)/(tugas)/tugas5" title="Tugas 5" />
+      <TugasButton href="/(arsip)/(tugas)/tugas6" title="Tugas 6" />
       
-     
+      {/* PERBAIKAN: 
+        1. Arahkan ke '/(arsip)/(tugas)/(tugas8)/index' agar lebih eksplisit untuk sistem tipe.
+        2. Gunakan komponen TugasButton yang sudah ada untuk konsistensi.
+      */}
+      <TugasButton href="/(arsip)/(tugas)/(tugas8)/index" title="Tugas 8 (Aplikasi Unismuh)" />
     </View>
   );
 }
@@ -18,25 +30,23 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 24,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#f4f4f8',
   },
-  text: {
-    fontSize: 22,
+  title: {
+    fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 8,
+    textAlign: 'center',
+    marginBottom: 24,
   },
-  subText: {
-    fontSize: 16,
-    color: '#666',
-    marginBottom: 20,
-  },
+  // Style untuk tombol yang konsisten
   button: {
-    backgroundColor: '#FF3B30',
+    backgroundColor: '#007AFF',
     paddingVertical: 14,
-    paddingHorizontal: 24,
-    borderRadius: 10,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginBottom: 12,
+    width: '100%',
   },
   buttonText: {
     color: 'white',

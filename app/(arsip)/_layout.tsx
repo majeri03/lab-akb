@@ -1,45 +1,42 @@
-import { Tabs, router } from 'expo-router';
-import { FontAwesome5, Ionicons } from '@expo/vector-icons';
+import { Tabs, useRouter } from 'expo-router';
+import React from 'react';
 import { Pressable } from 'react-native';
-// Komponen ikon yang sama seperti sebelumnya
-const TabBarIcon = ({ name, color }: { name: React.ComponentProps<typeof FontAwesome5>['name']; color: string }) => {
-  return <FontAwesome5 size={26} style={{ marginBottom: -3 }} name={name} color={color} />;
-};
+import { Ionicons, FontAwesome } from '@expo/vector-icons';
 
-export default function TabLayout() {
+export default function ArsipLayout() {
+  const router = useRouter();
+
   return (
-    <Tabs screenOptions={{
-      tabBarActiveTintColor: 'blue',
-      // Menambahkan tombol kembali di header untuk semua tab di dalam (arsip)
-      headerLeft: () => (
-        <Pressable 
-          onPress={() => router.push('/(tabs)')} 
-          style={{ marginLeft: 15 }}
-        >
-          <Ionicons name="arrow-back" size={24} color="black" />
-        </Pressable>
-      ),
-    }}>
+    <Tabs
+      screenOptions={{
+        headerLeft: () => (
+          <Pressable onPress={() => router.back()} style={{ marginLeft: 15 }}>
+            <Ionicons name="arrow-back-circle-outline" size={28} color="#007AFF" />
+          </Pressable>
+        ),
+      }}
+    >
       <Tabs.Screen
-        // Nama direktori, sekarang relatif terhadap (tabs)
         name="(tugas)"
         options={{
           title: 'Tugas',
-          tabBarIcon: ({ color }) => <TabBarIcon name="tasks" color={color} />,
+          headerTitle: 'Arsip Tugas',
+          tabBarIcon: ({ color }) => <FontAwesome size={28} name="tasks" color={color} />,
         }}
       />
       <Tabs.Screen
         name="(pertemuan)"
         options={{
           title: 'Pertemuan',
-          tabBarIcon: ({ color }) => <TabBarIcon name="users" color={color} />,
+          headerTitle: 'Arsip Pertemuan',
+          tabBarIcon: ({ color }) => <FontAwesome size={28} name="users" color={color} />,
         }}
       />
       <Tabs.Screen
         name="index"
         options={{
-          // href: null membuat rute ini tidak muncul di tab bar
           href: null,
+          headerShown: false, 
         }}
       />
     </Tabs>
